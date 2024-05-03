@@ -1,24 +1,33 @@
-import {Home, Login} from '../controllers/index.controller'
+// router js
+
+import {
+  Home,
+  Login,
+  printVisitas,
+  printDataInventario,
+} from "../controllers/index.controller";
 
 function router(route) {
-    let root = document.getElementById('root')
-    root.innerHTML = ''
-    
-  switch (route) {
-    case "":
-    return root.appendChild(Login())
-    case "#/":
-      return root.appendChild(Home())
+  let root = document.getElementById("root");
+  root.innerHTML = "";
+
+  if (window.location.hash === "") {
+    root.appendChild(Login());
+  } else {
+    root.appendChild(Home());
+
+    switch (route) {
       case "#/inventario":
-        return console.log("inventario");
-    case "#/solicitudes":
-      return console.log("solicitudes");
-    case "#/trazabilidad":
-      return console.log("trazabilidad");
+        return printDataInventario();
+      case "#/h_visita_tecnica":
+        return printVisitas();
+      case "#/trazabilidad":
+        return console.log("trazabilidad");
       case "#/admUsuarios":
-      return console.log("admUsuarios");
-      default: 
-      console.log("404")
+        return console.log("admUsuarios");
+      default:
+        console.log("404");
+    }
   }
 }
 
