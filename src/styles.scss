@@ -1,25 +1,26 @@
 @import "bootstrap/scss/bootstrap";
 
-.container {
+.grid-container {
   display: grid;
   grid-template-columns: 0.3fr 1.8fr;
-  grid-template-rows:  0.2fr 0.3fr 3.2fr;
+  grid-template-rows: 0.2fr 0.3fr 3.2fr;
   gap: 0px 0px;
   grid-auto-flow: row;
   grid-template-areas:
     // "brandin brandin"
+
     "user user"
     "aside main";
 }
 
 .grid-aside {
   grid-area: aside;
+  
 }
 
 .grid-user {
   grid-area: user;
 }
-
 
 .grid-main {
   grid-area: main;
@@ -37,7 +38,6 @@
 //   grid-area: actions;
 // }
 
-
 /* ----------------- login -----------------*/
 .img-container {
   width: 150px;
@@ -46,13 +46,12 @@
   // /50% para un circulo y px solo puntas y para cada punta individual 10px 5px 0 20px se lee izquierda primero de arriba en sentido de un reloj/
   background-image: url(media/img/sort-logo.svg);
   background-size: contain;
-    // /Contain la imagen llena el contenido del elemento/
+  // /Contain la imagen llena el contenido del elemento/
   background-repeat: no-repeat;
   // /Para que no se repita la imagen dentro del contenedor/
   background-position: center;
   // /Para centrar la imagen/
 }
-
 
 .login-container {
   display: flex;
@@ -63,4 +62,25 @@
   // /Centrar contenedor/
   height: 100vh;
   justify-content: center;
+}
+
+
+.list-group-item  {
+  white-space: nowrap;
+}
+
+
+.fade-in-out {
+  animation: fadeInOut 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }

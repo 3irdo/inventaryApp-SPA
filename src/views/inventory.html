@@ -1,0 +1,202 @@
+<div class=" d-flex align-items-center border-bottom gap-2">
+    <h2 class="ps-2 flex-fill">Inventario</h2>
+
+    <!-- barra de búsqueda -->
+    <div class="col-4 h-75 align-middle d-flex">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+        <button id="prueba" class="btn btn-outline-dark my-2 my-sm-0" type="submit">
+            Search
+        </button>
+    </div>
+
+
+    <!-- botones formulario modal -->
+
+    <!-- botón producto habitual -->
+
+    <button type="button" class="btn btn-info h-75" data-bs-toggle="modal" data-bs-target="#newProductModal"
+        data-bs-whatever="@getbootstrap">
+        Añadir habitual
+    </button>
+
+    <div class="modal modal-dialog-scrollable fade" id="newProductModal" tabindex="-1"
+        aria-labelledby="newProductModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="newProductModalLabel">
+                        Nuevo producto
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="inventario-form">
+                        <div class="mb-3">
+                            <label for="id_producto" class="col-form-label">ID:</label>
+                            <input type="text" class="form-control" id="id_producto" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="nombre_producto" class="col-form-label">Nombre:</label>
+                            <input type="text" class="form-control" id="nombre_producto" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="referencia" class="col-form-label">Referencia:</label>
+                            <input type="text" class="form-control" id="referencia" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="marca" class="col-form-label">Marca:</label>
+                            <input type="text" class="form-control" id="marca" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="num_orden" class="col-form-label">Número de orden:</label>
+                            <input type="text" class="form-control" id="num_orden" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="fecha_compra" class="col-form-label">Fecha de Compra:</label>
+                            <input type="text" class="form-control" id="fecha_compra" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="cantidad" class="col-form-label">Cantidad:</label>
+                            <input type="text" class="form-control" id="cantidad" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="nit_suministradora" class="col-form-label">NIT suministradora:</label>
+                            <input type="text" class="form-control" id="nit_suministradora" />
+                        </div>
+                        <button type="submit" id="agregar-inventario" class="btn btn-primary">Enviar</button>
+                </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Close
+                </button>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- botón productos marcados -->
+    <button type="button" class="btn btn-dark h-75" data-bs-toggle="modal" data-bs-target="#newProductMarked"
+        data-bs-whatever="@getbootstrap">
+        Añadir marcado
+    </button>
+
+    <div class="modal modal-dialog-scrollable fade text-white" data-bs-theme="dark" id="newProductMarked" tabindex="-1"
+        aria-labelledby="newProductMarkedLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="newProductMarkedLabel">
+                        Nuevo producto marcado
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="id_producto_marcado" class="col-form-label">ID:</label>
+                            <input type="text" class="form-control" id="id_producto_marcado" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="nombre_producto" class="col-form-label">Nombre:</label>
+                            <input type="text" class="form-control" id="nombre_producto" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="referencia" class="col-form-label">Referencia:</label>
+                            <input type="text" class="form-control" id="referencia" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="marca" class="col-form-label">Marca:</label>
+                            <input type="text" class="form-control" id="marca" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="num_orden" class="col-form-label">Número de orden:</label>
+                            <input type="text" class="form-control" id="num_orden" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="fecha_compra" class="col-form-label">Fecha de Compra:</label>
+                            <input type="text" class="form-control" id="fecha_compra" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="cantidad" class="col-form-label">Cantidad:</label>
+                            <input type="text" class="form-control" id="cantidad" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="nit_suministradora" class="col-form-label">NIT suministradora:</label>
+                            <input type="text" class="form-control" id="nit_suministradora" />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="button" class="btn btn-primary">Send message</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="habitual-tab" data-bs-toggle="tab" data-bs-target="#habitual" type="button"
+            role="tab" aria-controls="habitual" aria-selected="true">
+            Inventario habitual
+        </button>
+    </li>
+
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="marked-tab" data-bs-toggle="tab" data-bs-target="#marked" type="button" role="tab"
+            aria-controls="profile" aria-selected="false">
+            Inventario marcado
+        </button>
+    </li>
+</ul>
+
+<!-- Tab panels -->
+<div class="tab-content">
+    <div class="tab-pane active" id="habitual" role="tabpanel" aria-labelledby="habitual-tab">
+
+        <table class="table table-sm">
+            <thead>
+                <tr class="text-justify">
+                    <th scope="col">Id Producto</th>
+                    <th scope="col">Nombre producto</th>
+                    <th scope="col">Referencia</th>
+                    <th scope="col">Marca</th>
+                    <th scope="col"># de orden</th>
+                    <th scope="col">Fecha de compra</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">NIT empresa proveedora</th>
+                    <th scope="col">Modificar eliminar</th>
+                </tr>
+            </thead>
+            <tbody id="tablaBody_N">
+
+            </tbody>
+        </table>
+    </div>
+    <div class="tab-pane" id="marked" role="tabpanel" aria-labelledby="marked-tab">
+        inventario marcado
+
+        <table class="table table-sm table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">5</th>
+                    <th scope="col">6</th>
+                    <th scope="col">7</th>
+                    <th scope="col">8</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
