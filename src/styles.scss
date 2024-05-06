@@ -3,7 +3,7 @@
 .grid-container {
   display: grid;
   grid-template-columns: 0.3fr 1.8fr;
-  grid-template-rows: 0.2fr 0.3fr 3.2fr;
+  grid-template-rows: 0.2fr  3.2fr;
   gap: 0px 0px;
   grid-auto-flow: row;
   grid-template-areas:
@@ -77,15 +77,21 @@
 @keyframes fadeInOut {
   0% {
     opacity: 0;
-    transform: scale(0.9);
   }
   100% {
     opacity: 1;
-    transform: scale(1);
   }
 }
 
 
-.hide {
-  display: none;
+// .hide {
+//   display: none;
+// }
+
+.modal {
+  z-index: 3;
+}
+.modal-backdrop{
+  z-index: -2;
+  background-color: #fff;
 }
