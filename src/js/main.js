@@ -48,22 +48,3 @@ document
   });
 
 
-  document.addEventListener('DOMContentLoaded', function () {
-    var modales = document.querySelectorAll('.modal');
-    modales.forEach(function(modal) {
-        modal.addEventListener('shown.bs.modal', function () {
-            var backdrop = document.querySelector('.modal-backdrop');
-            if (backdrop) {
-                backdrop.classList.add('hide');
-            }
-        });
-        modal.addEventListener('hidden.bs.modal', function () {
-            var backdrop = document.querySelector('.modal-backdrop');
-            if (backdrop) {
-                backdrop.classList.remove('hide');
-            }
-        });
-    });
-});
-
-

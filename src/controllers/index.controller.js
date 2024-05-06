@@ -9,7 +9,7 @@ import { getProducts } from "./db.contoller";
 function Home() {
   const divElement = document.createElement("div");
   divElement.innerHTML = homeView;
-  divElement.classList = "fade-in-out grid-container mx-5 justify-content-center";
+  divElement.classList = "grid-container mx-5 justify-content-center";
 
   return divElement;
 }
@@ -28,6 +28,7 @@ function Login() {
 async function printDataInventario() {
   const contenidoDinamico = document.getElementById("contenidoDinamico");
   contenidoDinamico.innerHTML = inventoryView;
+  contenidoDinamico.classList = "fade-in-out"
   const inventario_data = await getProducts();
 
   inventario_data.forEach((producto) => {
@@ -40,6 +41,7 @@ async function printDataInventario() {
 
 async function printVisitas() {
   const contenidoDinamico = document.getElementById("contenidoDinamico");
+  contenidoDinamico.classList = "fade-in-out"
   contenidoDinamico.innerHTML = hVisitasView;
   const hVisitas_data = await getProducts();
 
