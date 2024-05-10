@@ -3,7 +3,7 @@
 
 async function getProducts() {
   try {
-    const response = await fetch("https://jsonplaceholder.typicode.com/users");
+    const response = await fetch("http://localhost:3000/inventario");
     const inventario_data = await response.json();
 
     return inventario_data;
@@ -16,7 +16,7 @@ async function getProducts() {
 // CREATE: Agregar un nuevo producto
 async function addProduct(productData) {
   try {
-    const response = await fetch("https://jsonplaceholder.typicode.com/users", {
+    const response = await fetch("http://localhost:3000/inventario", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -35,7 +35,7 @@ async function addProduct(productData) {
 // UPDATE: Actualizar un producto existente
 async function updateProduct(productId, updatedData) {
   try {
-    const response = await fetch(`https://jsonplaceholder.typicode.com/users/${productId}`, {
+    const response = await fetch(`http://localhost:3000/inventario/${productId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
@@ -53,7 +53,7 @@ async function updateProduct(productId, updatedData) {
 // DELETE: Eliminar un producto existente
 async function deleteProduct(productId) {
   try {
-    const response = await fetch(`https://jsonplaceholder.typicode.com/users/${productId}`, {
+    const response = await fetch(`http://localhost:3000/inventario/${productId}`, {
       method: "DELETE"
     });
     if (!response.ok) {
@@ -65,4 +65,20 @@ async function deleteProduct(productId) {
   }
 }
 
-export { addProduct, getProducts, updateProduct, deleteProduct };
+export { addProduct, getProducts, getEmpresas, updateProduct, deleteProduct };
+
+
+// crud empresas 
+
+// obtener datos empresas 
+
+async function getEmpresas() {
+  try {
+    const response = await fetch("http://localhost:3000/Empresa_Suministradora");
+    const empresas = await response.json();
+
+    return empresas;
+  } catch (error) {
+    console.error("Surgió un error al solicitar los datos ", error);
+  }
+}

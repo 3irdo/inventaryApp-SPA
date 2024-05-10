@@ -15,25 +15,25 @@ document
     event.preventDefault(); // Evitar que el formulario se envíe automáticamente
 
     // Obtener los datos del formulario
-    const id = document.getElementById("id_producto").value;
-    const nombre = document.getElementById("nombre_producto").value;
-    const referencia = document.getElementById("referencia").value;
-    const marca = document.getElementById("marca").value;
-    const numOrden = document.getElementById("num_orden").value;
-    const fechaCompra = document.getElementById("fecha_compra").value;
-    const cantidad = document.getElementById("cantidad").value;
-    const nit = document.getElementById("nit_suministradora").value;
+    const Pk_Id_Producto = document.getElementById("id_producto").value;
+    const Nombre_Producto = document.getElementById("nombre_producto").value;
+    const Referencia = document.getElementById("referencia").value;
+    const Marca = document.getElementById("marca").value;
+    const Numero_de_Orden = document.getElementById("num_orden").value;
+    const Fecha_de_Compra = document.getElementById("fecha_compra").value;
+    const Cantidad = document.getElementById("cantidad").value;
+    const Fk_NIT_Empresa_Suministradora = document.getElementById("nit_suministradora").value;
 
     // Crear objeto con los datos del producto
     const productData = {
-      id,
-      nombre,
-      referencia,
-      marca,
-      numOrden,
-      fechaCompra,
-      cantidad,
-      nit,
+      Pk_Id_Producto,
+      Nombre_Producto,
+      Referencia,
+      Marca,
+      Numero_de_Orden,
+      Fecha_de_Compra,
+      Cantidad,
+      Fk_NIT_Empresa_Suministradora,
     };
 
     try {
