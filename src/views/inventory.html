@@ -35,7 +35,7 @@
                     <form id="inventario-form">
                         <div class="mb-3">
                             <label for="id_producto" class="col-form-label">ID:</label>
-                            <input type="text" class="form-control" id="id_producto" />
+                            <input required type="text" class="form-control" id="id_producto" />
                         </div>
                         <div class="mb-3">
                             <label for="nombre_producto" class="col-form-label">Nombre:</label>
@@ -63,7 +63,10 @@
                         </div>
                         <div class="mb-3">
                             <label for="nit_suministradora" class="col-form-label">NIT suministradora:</label>
-                            <input type="text" class="form-control" id="nit_suministradora" />
+                            
+                            <select class="form-select"id="nit_suministradora" required aria-label="nit_suministradora">
+                                <option value="">Seleciona una empresa proveedora</option>
+                              </select>
                         </div>
                         <button type="submit" id="agregar-inventario" class="btn btn-primary">Enviar</button>
                 </div>
@@ -162,7 +165,7 @@
 <div class="tab-content">
     <div class="tab-pane active" id="habitual" role="tabpanel" aria-labelledby="habitual-tab">
 
-        <table class="table table-sm">
+        <table class="table table-striped table-sm text-center">
             <thead>
                 <tr class="text-justify">
                     <th scope="col">Id Producto</th>

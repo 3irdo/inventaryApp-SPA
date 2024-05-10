@@ -95,3 +95,23 @@
   z-index: -2;
   background-color: #fff;
 }
+
+body {
+  overflow-x: hidden;
+}
+
+table .btn_edit {
+  width:25px;
+  height: 25px;
+  background-image: url(./media/static/edit.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+table .btn_delete {
+  width:25px;
+  height: 25px;
+  background-image: url(./media/static/x-square.svg);
+  background-size:  contain;
+  background-repeat: no-repeat;
+}

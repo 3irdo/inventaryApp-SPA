@@ -4,7 +4,8 @@ import loginView from "../views/login.html";
 import homeView from "../views/home.html";
 import inventoryView from "../views/inventory.html";
 import hVisitasView from "../views/historial_visitas.html";
-import { getProducts } from "./db.contoller";
+import deletEditBtns from "../views/buttons_delete_edit.html";
+import { getProducts, getEmpresas } from "./db.contoller";
 
 function Home() {
   const divElement = document.createElement("div");
@@ -28,20 +29,47 @@ function Login() {
 async function printDataInventario() {
   const contenidoDinamico = document.getElementById("contenidoDinamico");
   contenidoDinamico.innerHTML = inventoryView;
-  contenidoDinamico.classList = "fade-in-out"
-  const inventario_data = await getProducts();
+  contenidoDinamico.classList = "fade-in-out";
 
-  inventario_data.forEach((producto) => {
-    const fila = document.createElement("tr");
-    fila.innerHTML = `<td>${producto.id}</td> <td>${producto.name}</td><td>${producto.email}</td><td>${producto.phone}</td><td>${producto.username}</td><td>${producto.website}</td> <button class="btn btn-danger"></button>`;
-    tablaBody_N.appendChild(fila);
-    console.log(fila);
-  });
+  try {
+    const inventario_data = await getProducts();
+    const empresas_data = await getEmpresas();
+    const selectForm = document.getElementById("nit_suministradora");
+
+    inventario_data.forEach((producto) => {
+      const fila = document.createElement("tr");
+      fila.innerHTML = `
+        <td>${producto.Pk_Id_Producto}</td>
+        <td>${producto.Nombre_Producto}</td>
+        <td>${producto.Referencia}</td>
+        <td>${producto.Marca}</td>
+        <td>${producto.Numero_de_Orden}</td>
+        <td>${new Date(producto.Fecha_de_Compra).toLocaleDateString()}</td>
+        <td>${producto.Cantidad}</td>
+        <td>${producto.Fk_NIT_Empresa_Suministradora}</td>
+        <td>${deletEditBtns}</td>
+      `;
+
+      tablaBody_N.appendChild(fila);
+    });
+
+    empresas_data.forEach((empresa) => {
+      const optionElelment = document.createElement("option");
+      optionElelment.value = empresa.Pk_NIT_Empresa_Suministradora;
+      optionElelment.textContent = `
+        ${empresa.Nombre_Empresa_Suministradora} - NIT: ${empresa.Pk_NIT_Empresa_Suministradora}
+        `;
+      selectForm.appendChild(optionElelment);
+    });
+  } catch (error) {
+    console.error("Error al obtener los datos del inventario:", error);
+    // Aquí puedes manejar el error, como mostrar un mensaje al usuario
+  }
 }
 
 async function printVisitas() {
   const contenidoDinamico = document.getElementById("contenidoDinamico");
-  contenidoDinamico.classList = "fade-in-out"
+  contenidoDinamico.classList = "fade-in-out";
   contenidoDinamico.innerHTML = hVisitasView;
   const hVisitas_data = await getProducts();
 
