@@ -1,3 +1,5 @@
+// main.js
+
 import "../styles.scss";
 import * as bootstrap from "bootstrap";
 import router from "../router/index.routes";
@@ -6,6 +8,7 @@ import {
   getProductById,
   deleteProduct,
 } from "../controllers/db.contoller";
+import { main } from "@popperjs/core";
 
 router(window.location.hash);
 window.addEventListener("hashchange", () => {
@@ -57,7 +60,7 @@ document
       };
 
       if (newProduct) {
-        appendAlert("Nice, you triggered this alert message!", "success");
+        appendAlert("Producto añadido exitosamente", "success");
 
       }
 
@@ -71,8 +74,7 @@ document
 // buscar elemento por id
 // Manejador del evento de búsqueda
 const btnIdSearch = document.getElementById("inventory_btn-search");
-btnIdSearch.addEventListener("click", async (e) => {
-  e.preventDefault();
+btnIdSearch.addEventListener("click", async () => {
 
   const productId = document.getElementById("inventarySearchInput").value;
 
@@ -104,32 +106,8 @@ btnIdSearch.addEventListener("click", async (e) => {
     const productDetailsModal = new bootstrap.Modal(
       document.getElementById("productDetailsModal")
     );
-    productDetailsModal.show();
+   productDetailsModal.show();
   } catch (error) {
     console.error("Error al obtener el producto:", error);
   }
-});
-
-// handler para eliminar producto --------------
-
-const btn_delete = document.querySelectorAll(".btn_delete");
-
-btn_delete.forEach((button) => {
-  button.addEventListener("click", async (e) => {
-    e.preventDefault();
-
-    try {
-      // Obtener el ID del producto que se va a eliminar desde el atributo data-product-id del botón
-      const productId = e.target.dataset.productId;
-
-      // Llamar a la función deleteProductById del controlador, pasando el productId
-      const deleteP = await deleteProduct(productId);
-
-      // Mostrar un mensaje de éxito o actualizar la interfaz de usuario según sea necesario
-      console.log("Producto eliminado exitosamente:", deleteP);
-    } catch (error) {
-      console.error("Error al eliminar el producto:", error);
-      // Puedes mostrar un mensaje de error al usuario si la eliminación falla
-    }
-  });
 });

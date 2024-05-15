@@ -53,16 +53,49 @@ async function printDataInventario() {
         <td>${producto.Cantidad}</td>
         <td>${producto.Fk_Nombre_Empresa_Suministradora}</td>
         <td>
-        <button type="button" class="btn_edit rounded btn btn-primary" data-product-id="${
-          producto.Pk_Id_Producto
-        }"><span></span></button>
-        <button type="button" class="btn_delete rounded btn btn-danger" data-product-id="${
-          producto.Pk_Id_Producto
-        }" ><span></span></button>
+          <button type="button" class="btn_edit rounded btn btn-primary" data-product-id="${producto.Pk_Id_Producto}"><span></span></button>
+          <button type="button" class="btn_delete rounded btn btn-danger" data-product-id="${producto.Pk_Id_Producto}"><span></span></button>
         </td>
       `;
-
       tablaBody_N.appendChild(fila);
+
+      // Aquí, después de agregar la fila, agregamos el event listener para el botón de eliminar
+      const btn_delete = fila.querySelector(".btn_delete");
+      btn_delete.addEventListener("click", async (e) => {
+        
+        try {
+          // Obtener el ID del producto que se va a eliminar desde el atributo data-product-id del botón
+          const productId = e.target.dataset.productId;
+
+      
+          const deleteP = await deleteProduct(productId);
+
+          // Mostrar un mensaje de éxito o actualizar la interfaz de usuario según sea necesario
+         
+          const alertPlaceholder = document.getElementById("liveAlertPlaceholder");
+          const appendAlert = (message, type) => {
+            const wrapper = document.createElement("div");
+            wrapper.innerHTML = [
+              `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+              `   <div>${message}</div>`,
+              '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+              "</div>",
+            ].join("");
+    
+            alertPlaceholder.append(wrapper);
+          };
+    
+          if (deleteP) {
+            appendAlert("Producto eliminado exitosamente", "danger");
+          }
+
+          printDataInventario()
+          
+        } catch (error) {
+          console.error("Error al eliminar el producto:", error);
+          // Puedes mostrar un mensaje de error al usuario si la eliminación falla
+        }
+      });
     });
 
     async function printProductByID() {
@@ -82,7 +115,7 @@ async function printDataInventario() {
       optionElelment.value = empresa.Nombre_Empresa_Suministradora;
       optionElelment.textContent = `
         ${empresa.Nombre_Empresa_Suministradora} - NIT: ${empresa.Pk_NIT_Empresa_Suministradora}
-        `;
+      `;
       selectForm.appendChild(optionElelment);
     });
   } catch (error) {

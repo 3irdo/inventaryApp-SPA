@@ -68,12 +68,14 @@ async function updateProduct(productId, updatedData) {
 // DELETE: Eliminar un producto existente
 async function deleteProduct(productId) {
   try {
+    console.log(productId)
     const response = await fetch(`http://localhost:3000/inventario/${productId}`, {
       method: "DELETE"
     });
     if (!response.ok) {
       throw new Error(`Error al eliminar el producto con ID ${productId}`);
     }
+    return response.json()
   } catch (error) {
     console.error(`Error al eliminar el producto con ID ${productId}:`, error);
     throw error;
