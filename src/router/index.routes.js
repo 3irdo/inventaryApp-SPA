@@ -22,7 +22,7 @@ function router(route) {
       case "#/h_visita_tecnica":
         return printVisitas();
       case "#/trazabilidad":
-        return console.log("trazabilidad");
+        return console.log("historial_visitas");
       case "#/admUsuarios":
         return console.log("admUsuarios");
       default:

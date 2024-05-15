@@ -96,9 +96,9 @@
   background-color: #fff;
 }
 
-body {
-  overflow-x: hidden;
-}
+// body {
+//   overflow-x: hidden;
+// }
 
 table .btn_edit {
   width:25px;
@@ -114,4 +114,11 @@ table .btn_delete {
   background-image: url(./media/static/x-square.svg);
   background-size:  contain;
   background-repeat: no-repeat;
+}
+
+// contendor de alertas
+#liveAlertPlaceholder {
+  position: absolute;
+  top: 0;
+  right: 0;
 }

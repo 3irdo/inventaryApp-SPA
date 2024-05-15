@@ -3,8 +3,10 @@
 
     <!-- barra de búsqueda -->
     <div class="col-4 h-75 align-middle d-flex">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-        <button id="prueba" class="btn btn-outline-dark my-2 my-sm-0" type="submit">
+
+        <input id="inventarySearchInput" class="form-control mr-sm-2" type="search" placeholder="Search"
+            aria-label="Search" />
+        <button id="inventory_btn-search" class="btn btn-outline-dark my-2 my-sm-0" type="submit">
             Search
         </button>
     </div>
@@ -21,6 +23,23 @@
         Añadir habitual
     </button>
 
+    <!-- Modal para mostrar detalles del producto -->
+    <div class="modal fade" id="productDetailsModal" tabindex="-1" aria-labelledby="productDetailsModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="productDetailsModalLabel">Detalles del Producto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="product-details-content">
+                    <!-- Aquí se mostrarán los detalles del producto -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div class="modal modal-dialog-scrollable fade" id="newProductModal" tabindex="-1"
         aria-labelledby="newProductModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -33,10 +52,10 @@
                 </div>
                 <div class="modal-body">
                     <form id="inventario-form">
-                        <div class="mb-3">
+                        <!-- <div class="mb-3">
                             <label for="id_producto" class="col-form-label">ID:</label>
                             <input required type="text" class="form-control" id="id_producto" />
-                        </div>
+                        </div> -->
                         <div class="mb-3">
                             <label for="nombre_producto" class="col-form-label">Nombre:</label>
                             <input type="text" class="form-control" id="nombre_producto" />
@@ -47,7 +66,19 @@
                         </div>
                         <div class="mb-3">
                             <label for="marca" class="col-form-label">Marca:</label>
-                            <input type="text" class="form-control" id="marca" />
+                            <select class="form-select" id="marca" aria-label="marca">
+                                <option value="">Seleciona una marca</option>
+                                <option value="SegurCam">SegurCam</option>
+                                <option value="SeguriHome">SeguriHome</option>
+                                <option value="SecureSense">SecureSense</option>
+                                <option value="SmartLock">SmartLock</option>
+                                <option value="VigiCam">VigiCam</option>
+                                <option value="">BiometricAccess</option>
+                                <option value="4KWatch">4KWatch</option>
+                                <option value="SafeGuard">SafeGuard</option>
+                                <option value="InterBuild">InterBuild</option>
+                                <option value="RFIDSecure">RFIDSecure</option>
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label for="num_orden" class="col-form-label">Número de orden:</label>
@@ -55,18 +86,22 @@
                         </div>
                         <div class="mb-3">
                             <label for="fecha_compra" class="col-form-label">Fecha de Compra:</label>
-                            <input type="text" class="form-control" id="fecha_compra" />
+                            <input type="date" 
+                            min= "1980-01-01"
+                            max= "2060-12-31"
+                            class="form-control" id="fecha_compra" />
                         </div>
                         <div class="mb-3">
                             <label for="cantidad" class="col-form-label">Cantidad:</label>
                             <input type="text" class="form-control" id="cantidad" />
                         </div>
                         <div class="mb-3">
-                            <label for="nit_suministradora" class="col-form-label">NIT suministradora:</label>
-                            
-                            <select class="form-select"id="nit_suministradora" required aria-label="nit_suministradora">
-                                <option value="">Seleciona una empresa proveedora</option>
-                              </select>
+                            <label for="nit_suministradora" class="col-form-label">Empresa suministradora:</label>
+
+                            <select class="form-select" id="nit_suministradora" required
+                                aria-label="nit_suministradora">
+                                <option value="">Seleciona un proveedor</option>
+                            </select>
                         </div>
                         <button type="submit" id="agregar-inventario" class="btn btn-primary">Enviar</button>
                 </div>
@@ -175,7 +210,7 @@
                     <th scope="col"># de orden</th>
                     <th scope="col">Fecha de compra</th>
                     <th scope="col">Cantidad</th>
-                    <th scope="col">NIT empresa proveedora</th>
+                    <th scope="col">Empresa proveedora</th>
                     <th scope="col">Modificar eliminar</th>
                 </tr>
             </thead>
