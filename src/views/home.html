@@ -7,11 +7,13 @@
     <a href="#/inventario" class="nav-link list-group-item list-group-item-action" aria-current="true">
       Inventario
     </a>
-    <a href="#/h_visita_tecnica" class="nav-link list-group-item list-group-item-action" aria-current="true" >Historial visitas</a>
-    <a href="#/trazabilidad" class="nav-link list-group-item list-group-item-action disabled">Trazabilidad</a>
+    <a href="#/h_visita_tecnica" class="nav-link list-group-item list-group-item-action" aria-current="true">Historial
+      visitas</a>
     <a href="#/admUsuarios" class="nav-link list-group-item list-group-item-action disabled">Administrar usuarios</a>
   </ul>
 </div>
+
+
 
 <!-- barra usuario -->
 <div class="grid-user d-flex align-items-center col-12 align-middle">
@@ -31,5 +33,12 @@
 
 <!-- contenedor del inventario y elementos principales de la base de datos -->
 <div id="contenidoDinamico" class="grid-main border h-100">
+
+  <div id="liveAlertPlaceholder">
+    <div class="alert alert-${type} alert-dismissible" role="alert">
+       <div>mensaje</div>
+       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+  </div>
 
 </div>

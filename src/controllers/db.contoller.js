@@ -12,6 +12,21 @@ async function getProducts() {
   }
 }
 
+// Obtener un producto por su ID
+
+async function getProductById(productId) {
+  try {
+    const response = await fetch(`http://localhost:3000/inventario/${productId}`);
+    const product = await response.json();
+
+    return product;
+  } catch (error) {
+    console.error(`Error al obtener el producto con ID ${productId}:`, error);
+    throw error;
+  }
+}
+
+
 
 // CREATE: Agregar un nuevo producto
 async function addProduct(productData) {
@@ -65,7 +80,6 @@ async function deleteProduct(productId) {
   }
 }
 
-export { addProduct, getProducts, getEmpresas, updateProduct, deleteProduct };
 
 
 // crud empresas 
@@ -76,9 +90,12 @@ async function getEmpresas() {
   try {
     const response = await fetch("http://localhost:3000/Empresa_Suministradora");
     const empresas = await response.json();
-
+    
     return empresas;
   } catch (error) {
     console.error("Surgió un error al solicitar los datos ", error);
   }
 }
+
+
+export { addProduct, getProducts,getProductById, getEmpresas, updateProduct, deleteProduct };
