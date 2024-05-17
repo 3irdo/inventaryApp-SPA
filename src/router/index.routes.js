@@ -6,7 +6,7 @@ import {
   printVisitas,
   printDataInventario,
 } from "../controllers/index.controller";
-import { postProductHandler, postVisitaHandler, updateProductHandler } from "../handler/events.handler";
+import { SearchProductId, postProductHandler, postVisitaHandler,updateProductHandler } from "../handler/events.handler";
 
 function router(route) {
   let root = document.getElementById("root");
@@ -19,7 +19,7 @@ function router(route) {
 
     switch (route) {
       case "#/inventario":
-        return printDataInventario(), postProductHandler(),updateProductHandler();
+        return printDataInventario(), postProductHandler(),updateProductHandler(),SearchProductId();
       case "#/h_visita_tecnica":
         return printVisitas(), postVisitaHandler();
       case "#/admUsuarios":

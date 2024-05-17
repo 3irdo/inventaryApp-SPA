@@ -6,18 +6,18 @@ import {
   addProduct,
   updateProduct,
   addVisita,
+  getVisitaById,
 } from "../controllers/db.contoller";
-import { printDataInventario } from "../controllers/index.controller";
-
+import { printDataInventario, showAlert } from "../controllers/index.controller";
 
 // función para refrescar el contenido dinamico de inventario
 
 function refreshDynamicContent() {
-  document.addEventListener('click', (event)=>{
-    if(event.target.classList.contains('refresh-inventory')){
-      printDataInventario()
+  document.addEventListener("click", (event) => {
+    if (event.target.classList.contains("refresh-inventory")) {
+      printDataInventario();
     }
-  })
+  });
 }
 
 function refreshWindow(delay = 3000) {
@@ -26,8 +26,51 @@ function refreshWindow(delay = 3000) {
   }, delay);
 }
 
-  // -----------------------------
 
+
+// manejador buscar producto por id
+export function SearchProductId() {
+  const btnIdSearch = document.getElementById("inventory_btn-search");
+
+  const invSearch = btnIdSearch.addEventListener("click", async () => {
+    const productId = document.getElementById("inventarySearchInput").value;
+
+    try {
+      const product = await getProductById(productId);
+      console.log(product);
+
+      // Construir el HTML para mostrar los detalles del producto
+      const productDetailsHTML = `
+      <div>
+        <p><strong>ID:</strong> ${product.Pk_Id_Producto}</p>
+        <p><strong>Nombre:</strong> ${product.Nombre_Producto}</p>
+        <p><strong>Referencia:</strong> ${product.Referencia}</p>
+        <p><strong>Marca:</strong> ${product.Marca}</p>
+        <p><strong>Número de Orden:</strong> ${product.Numero_de_Orden}</p>
+        <p><strong>Fecha de Compra:</strong> ${product.Fecha_de_Compra}</p>
+        <p><strong>Cantidad:</strong> ${product.Cantidad}</p>
+        <p><strong>NIT Empresa Suministradora:</strong> ${product.Fk_NIT_Empresa_Suministradora}</p>
+      </div>
+    `;
+
+      // Actualizar el contenido del modal con los detalles del producto
+      const productDetailsContainer = document.getElementById(
+        "product-details-content"
+      );
+      productDetailsContainer.innerHTML = productDetailsHTML;
+
+      // Mostrar el modal
+      const productDetailsModal = new bootstrap.Modal(
+        document.getElementById("productDetailsModal")
+      );
+      productDetailsModal.show();
+    } catch (error) {
+      console.error("Error al obtener el producto:", error);
+    }
+  });
+}
+
+// -----------------------------
 
 // manejador para añadir inventario -----------
 function postProductHandler() {
@@ -80,24 +123,22 @@ function postProductHandler() {
           appendAlert("Producto añadido exitosamente", "success");
         }
 
-        const newProductModal = bootstrap.Modal.getInstance(document.getElementById("newProductModal"));
+        const newProductModal = bootstrap.Modal.getInstance(
+          document.getElementById("newProductModal")
+        );
         newProductModal.hide();
 
         document.getElementById("inventario-form").reset();
-        
-        refreshWindow()
-      
-        
+
+        // refreshWindow()
+
         // Aquí puedes hacer algo con el nuevo producto, como mostrar un mensaje de éxito o actualizar la lista de productos en la interfaz de usuario
       } catch (error) {
         console.error("Error al añadir el producto:", error);
         // Aquí puedes manejar el error, como mostrar un mensaje de error al usuario
       }
-
     });
 }
-
-
 
 // Manejador de evento para el botón de edición de productos
 async function updateProductHandler() {
@@ -122,8 +163,9 @@ async function updateProductHandler() {
           document.getElementById("edit_marca").value = product.Marca;
           document.getElementById("edit_num_orden").value =
             product.Numero_de_Orden;
-          document.getElementById("edit_fecha_compra").value =
-            new Date(product.Fecha_de_Compra).toLocaleDateString();
+          document.getElementById("edit_fecha_compra").value = new Date(
+            product.Fecha_de_Compra
+          ).toLocaleDateString();
           document.getElementById("edit_cantidad").value = product.Cantidad;
         }
         populateEditForm(product);
@@ -141,115 +183,159 @@ async function updateProductHandler() {
   });
 
   // Manejador de evento para el formulario modal de edición
-  document.getElementById("editProductForm").addEventListener("submit", async (event) => {
-    event.preventDefault();
-    const productId = event.currentTarget.dataset.productId; 
-    const updatedData = {
-      Nombre_Producto: document.getElementById("edit_nombre_producto").value,
-      Referencia: document.getElementById("edit_referencia").value,
-      Marca: document.getElementById("edit_marca").value,
-      Numero_de_Orden: document.getElementById("edit_num_orden").value,
-      Fecha_de_Compra: document.getElementById("edit_fecha_compra").value,
-      Cantidad: document.getElementById("edit_cantidad").value,
-    };
-
-    try {
-      // Actualizar el producto utilizando la función updateProduct
-      const updatedProductRes = await updateProduct(productId, updatedData);
-      // Mostrar un mensaje de éxito al usuario
-      // Cerrar el formulario modal de edición
-      const editModal = bootstrap.Modal.getInstance(document.getElementById("editProductModal"));
-      editModal.hide();
-
-      const alertPlaceholder = document.getElementById("liveAlertPlaceholder");
-      const appendAlert = (message, type) => {
-        const wrapper = document.createElement("div");
-        wrapper.innerHTML = [
-          `<div class="alert alert-${type} alert-dismissible" role="alert">`,
-          `   <div>${message}</div>`,
-          '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
-          "</div>",
-        ].join("");
-
-        alertPlaceholder.append(wrapper);
+  document
+    .getElementById("editProductForm")
+    .addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const productId = event.currentTarget.dataset.productId;
+      const updatedData = {
+        Nombre_Producto: document.getElementById("edit_nombre_producto").value,
+        Referencia: document.getElementById("edit_referencia").value,
+        Marca: document.getElementById("edit_marca").value,
+        Numero_de_Orden: document.getElementById("edit_num_orden").value,
+        Fecha_de_Compra: document.getElementById("edit_fecha_compra").value,
+        Cantidad: document.getElementById("edit_cantidad").value,
       };
 
-      if (updatedProductRes) {
-        appendAlert("Producto actualizado exitosamente", "primary");
+      try {
+        // Actualizar el producto utilizando la función updateProduct
+        const updatedProductRes = await updateProduct(productId, updatedData);
+        // Mostrar un mensaje de éxito al usuario
+        // Cerrar el formulario modal de edición
+        const editModal = bootstrap.Modal.getInstance(
+          document.getElementById("editProductModal")
+        );
+        editModal.hide();
+
+        const alertPlaceholder = document.getElementById(
+          "liveAlertPlaceholder"
+        );
+        const appendAlert = (message, type) => {
+          const wrapper = document.createElement("div");
+          wrapper.innerHTML = [
+            `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+            `   <div>${message}</div>`,
+            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+            "</div>",
+          ].join("");
+
+          alertPlaceholder.append(wrapper);
+        };
+
+        if (updatedProductRes) {
+          appendAlert("Producto actualizado exitosamente", "primary");
+        }
+      } catch (error) {
+        console.error("Error al actualizar el producto:", error);
+        // Manejar el error, por ejemplo, mostrando un mensaje al usuario
       }
-
-    } catch (error) {
-      console.error("Error al actualizar el producto:", error);
-      // Manejar el error, por ejemplo, mostrando un mensaje al usuario
-    }
-  });
+    });
 }
-
-
 
 // Manejador para añadir visita técnica-----------
 
+// export function postVisitaHandler() {
+//   document
+//     .getElementById("visit-form")
+//     .addEventListener("submit", async (event) => {
+//       event.preventDefault(); // Evitar que el formulario se envíe automáticamente
+
+//       const fecha_visita = document.getElementById("fecha_visita").value;
+//       const tipo_visita = document.getElementById("tipo_visita").value;
+//       const descripcion = document.getElementById("descripcion").value;
+//       const cc_usuario = document.getElementById(
+//         "clienteCC_select_input"
+//       ).value;
+//       const id_producto = document.getElementById("clienteProducto").value;
+//       const num_cuenta_cliente = document.getElementById(
+//         "cuentaClienteSelect"
+//       ).value;
+
+//       // Crear objeto con los datos de la visita
+//       const visitaData = {
+//         fecha_visita,
+//         tipo_visita,
+//         descripcion,
+//         cc_usuario,
+//         id_producto,
+//         num_cuenta_cliente,
+//       };
+
+//       try {
+//         // Agregar la visita usando la función del controlador de la base de datos
+//         const newVisita = await addVisita(visitaData);
+
+//         const alertPlaceholder = document.getElementById(
+//           "liveAlertPlaceholder"
+//         );
+//         const appendAlert = (message, type) => {
+//           const wrapper = document.createElement("div");
+//           wrapper.innerHTML = [
+//             `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+//             `   <div>${message}</div>`,
+//             '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+//             "</div>",
+//           ].join("");
+
+//           alertPlaceholder.append(wrapper);
+//         };
+
+//         if (newVisita && newVisita.success) {
+//           appendAlert("Visita añadida exitosamente", "success");
+//         }
+
+//         // Cerrar el modal después de agregar la visita
+//         const newVisitModal = bootstrap.Modal.getInstance(
+//           document.getElementById("newVisitModal")
+//         );
+//         newVisitModal.hide();
+
+//         // Limpiar el formulario después de agregar la visita
+//         document.getElementById("visit-form").reset();
+
+//         // Actualizar la ventana después de agregar la visita
+//         refreshWindow();
+//       } catch (error) {
+//         console.error("Error al añadir la visita:", error);
+//         appendAlert("Error al añadir la visita", "danger");
+//         // Manejar el error, como mostrar un mensaje de error al usuario
+//       }
+//     });
+// }
+
 export function postVisitaHandler() {
   document.getElementById("visit-form").addEventListener("submit", async (event) => {
-    event.preventDefault(); // Evitar que el formulario se envíe automáticamente
+    event.preventDefault();
 
-    const fecha_visita = document.getElementById("fecha_visita").value;
-    const tipo_visita = document.getElementById("tipo_visita").value;
-    const descripcion = document.getElementById("descripcion").value;
-    const cc_usuario = document.getElementById("clienteCC_select_input").value;
-    const id_producto = document.getElementById("clienteProducto").value;
-    const num_cuenta_cliente = document.getElementById("cuentaClienteSelect").value;
-
-    // Crear objeto con los datos de la visita
     const visitaData = {
-      fecha_visita,
-      tipo_visita,
-      descripcion,
-      cc_usuario,
-      id_producto,
-      num_cuenta_cliente,
+      fecha_visita: document.getElementById("fecha_visita").value,
+      tipo_visita: document.getElementById("tipo_visita").value,
+      descripcion: document.getElementById("descripcion").value,
+      cc_usuario: document.getElementById("clienteCC_select_input").value,
+      id_producto: document.getElementById("clienteProducto").value,
+      num_cuenta_cliente: document.getElementById("cuentaClienteSelect").value,
     };
-try {
-      // Agregar la visita usando la función del controlador de la base de datos
+
+    try {
       const newVisita = await addVisita(visitaData);
-        
-      const alertPlaceholder = document.getElementById("liveAlertPlaceholder");
-      const appendAlert = (message, type) => {
-        const wrapper = document.createElement("div");
-        wrapper.innerHTML = [
-          `<div class="alert alert-${type} alert-dismissible" role="alert">`,
-          `   <div>${message}</div>`,
-          '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
-          "</div>",
-        ].join("");
-
-        alertPlaceholder.append(wrapper);
-      };
-
-      if (newVisita) {
-        appendAlert("Visita añadida exitosamente", "success");
+      if (newVisita && newVisita.success) {
+        showAlert("Visita añadida exitosamente", "success");
+        bootstrap.Modal.getInstance(document.getElementById("newVisitModal")).hide();
+        document.getElementById("visit-form").reset();
+        refreshWindow();
       }
-
-      // Cerrar el modal después de agregar la visita
-      const newVisitModal = bootstrap.Modal.getInstance(document.getElementById("newVisitModal"));
-      newVisitModal.hide();
-
-      // Limpiar el formulario después de agregar la visita
-      document.getElementById("visit-form").reset();
-
-      // Actualizar la ventana después de agregar la visita
-      refreshWindow();
-
     } catch (error) {
       console.error("Error al añadir la visita:", error);
-      // Manejar el error, como mostrar un mensaje de error al usuario
+      showAlert("Error al añadir la visita", "danger");
     }
   });
 }
 
+// manejador buscar visita por id
 
 
 
+export { updateProductHandler, postProductHandler, refreshDynamicContent };
 
 
-export { updateProductHandler, postProductHandler,refreshDynamicContent,};
+

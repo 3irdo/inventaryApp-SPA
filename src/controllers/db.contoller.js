@@ -10,6 +10,7 @@ export async function addProduct(productData) {
       body: JSON.stringify(productData)
     });
     const newProduct = await response.json();
+    console.log(newProduct)
     return newProduct;
   } catch (error) {
     console.error("Error al agregar un producto:", error);
@@ -75,26 +76,50 @@ export async function deleteProduct(productId) {
 
 // ------------------------visitas-----------------
 
+// export async function addVisita(visitaData) {
+//   try {
+//     const response = await fetch("http://localhost:3000/Visita_Tecnica", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json"
+//       },
+//       body: JSON.stringify(visitaData)
+//     });
+
+//     if (!response.ok) {
+//       throw new Error("Error en la respuesta del servidor");
+//     }
+
+//     const newVisita = await response.json();
+//     return newVisita;
+//   } catch (error) {
+//     console.error("Error al agregar una visita técnica:", error);
+//     throw error;
+//   }
+// }
+
 export async function addVisita(visitaData) {
   try {
-    const response = await fetch("http://localhost:3000/visitas", {
+    const response = await fetch("http://localhost:3000/Visita_Tecnica", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(visitaData)
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(visitaData),
     });
-    const newVisita = await response.json();
-    return newVisita;
+    if (!response.ok) {
+      throw new Error("Error en la respuesta del servidor");
+    }
+    return await response.json();
   } catch (error) {
     console.error("Error al agregar una visita técnica:", error);
     throw error;
   }
 }
 
+
+
 export async function getVisitas() {
   try {
-    const response = await fetch("http://localhost:3000/visitas");
+    const response = await fetch("http://localhost:3000/Visita_Tecnica");
     const visitasData = await response.json();
     return visitasData;
   } catch (error) {
@@ -105,7 +130,7 @@ export async function getVisitas() {
 
 export async function getVisitaById(visitaId) {
   try {
-    const response = await fetch(`http://localhost:3000/visitas/${visitaId}`);
+    const response = await fetch(`http://localhost:3000/Visita_Tecnica/${visitaId}`);
     const visita = await response.json();
     return visita[0];
   } catch (error) {
@@ -116,7 +141,7 @@ export async function getVisitaById(visitaId) {
 
 export async function updateVisita(visitaId, updatedData) {
   try {
-    const response = await fetch(`http://localhost:3000/visitas/${visitaId}`, {
+    const response = await fetch(`http://localhost:3000/Visita_Tecnica/${visitaId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
@@ -133,7 +158,7 @@ export async function updateVisita(visitaId, updatedData) {
 
 export async function deleteVisita(visitaId) {
   try {
-    const response = await fetch(`http://localhost:3000/visitas/${visitaId}`, {
+    const response = await fetch(`http://localhost:3000/Visita_Tecnica/${visitaId}`, {
       method: "DELETE"
     });
     if (!response.ok) {
