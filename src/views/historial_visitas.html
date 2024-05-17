@@ -1,77 +1,74 @@
-<div class=" d-flex align-items-center border-bottom gap-2">
-    <h2 class="ps-2 flex-fill">hostorial visitas</h2>
+<div class="d-flex align-items-center border-bottom gap-2">
+    <h2 class="ps-2 flex-fill">Historial de Visitas</h2>
 
-    <!-- barra de búsqueda -->
+    <!-- Barra de búsqueda -->
     <div class="col-4 h-75 align-middle d-flex">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+        <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar" />
         <button id="prueba" class="btn btn-outline-dark my-2 my-sm-0" type="submit">
-            Search
+            Buscar
         </button>
     </div>
 
-
-    <!-- botones formulario modal -->
-
-    <!-- botón producto habitual -->
-
-    <button type="button" class="btn btn-info h-75" data-bs-toggle="modal" data-bs-target="#newProductModal"
+    <!-- Botón para añadir una nueva visita -->
+    <button type="button" class="btn btn-info h-75" data-bs-toggle="modal" data-bs-target="#newVisitModal"
         data-bs-whatever="@getbootstrap">
-        Añadir historial de visita
+        Añadir Visita
     </button>
 
-    <div class="modal modal-dialog-scrollable fade" id="newProductModal" tabindex="-1"
-        aria-labelledby="newProductModalLabel" aria-hidden="true">
+    <!-- Modal para añadir una nueva visita -->
+    <div class="modal fade" id="newVisitModal" tabindex="-1" aria-labelledby="newVisitModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="newProductModalLabel">
-                        Nuevo producto
+                    <h1 class="modal-title fs-5" id="newVisitModalLabel">
+                        Nueva Visita
                     </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="inventario-form">
+                    <form id="visit-form">
                         <div class="mb-3">
-                            <label for="id_producto" class="col-form-label">ID:</label>
-                            <input type="text" class="form-control" id="id_producto" />
+                            <label for="fecha_visita" class="col-form-label">Fecha:</label>
+                            <input type="date" class="form-control" id="fecha_visita" />
                         </div>
                         <div class="mb-3">
-                            <label for="nombre_producto" class="col-form-label">Nombre:</label>
-                            <input type="text" class="form-control" id="nombre_producto" />
+                            <label for="tipo_visita" class="col-form-label">Tipo:</label>
+                            <input type="text" class="form-control" id="tipo_visita" />
                         </div>
                         <div class="mb-3">
-                            <label for="referencia" class="col-form-label">Referencia:</label>
-                            <input type="text" class="form-control" id="referencia" />
+                            <label for="descripcion" class="col-form-label">Descripción:</label>
+                            <textarea class="form-control" id="descripcion"></textarea>
                         </div>
                         <div class="mb-3">
-                            <label for="marca" class="col-form-label">Marca:</label>
-                            <input type="text" class="form-control" id="marca" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="num_orden" class="col-form-label">Número de orden:</label>
-                            <input type="text" class="form-control" id="num_orden" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="fecha_compra" class="col-form-label">Fecha de Compra:</label>
-                            <input type="text" class="form-control" id="fecha_compra" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="cantidad" class="col-form-label">Cantidad:</label>
-                            <input type="text" class="form-control" id="cantidad" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="nit_suministradora" class="col-form-label">NIT suministradora:</label>
-                            <input type="text" class="form-control" id="nit_suministradora" />
-                        </div>
-                        <button type="submit" id="agregar-inventario" class="btn btn-primary">Enviar</button>
-                </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                    Close
-                </button>
+                            <label for="cc_usuario" class="col-form-label">CC Usuario:</label>
 
+                            <select class="form-select" id="clienteCC_select_input" required
+                                aria-label="clienteCC_select_input">
+                                <option value="">Seleciona un usuario
+                                </option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="clienteProducto" class="col-form-label">ID Producto:</label>
+
+                            <select class="form-select" id="clienteProducto" required aria-label="clienteProduct">
+                                <option value="">seleccione un producto
+                                </option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="num_cuenta_cliente" class="col-form-label">Número Cuenta Cliente:</label>
+
+                            <select class="form-select" id="cuentaClienteSelect" required
+                                aria-label="cuentaClienteSelect">
+                                <option value="">Seleciona una cuenta
+                                </option>
+                            </select>
+
+                        </div>
+                        <button type="submit" id="agregar-visita" class="btn btn-primary">Enviar</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -80,33 +77,32 @@
 <!-- Nav tabs -->
 <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="habitual-tab" data-bs-toggle="tab" data-bs-target="#habitual" type="button"
-            role="tab" aria-controls="habitual" aria-selected="true">
-            Visitas recientes
+        <button class="nav-link active" id="recent-visits-tab" data-bs-toggle="tab" data-bs-target="#recent-visits"
+            type="button" role="tab" aria-controls="recent-visits" aria-selected="true">
+            Visitas Recientes
         </button>
     </li>
 </ul>
 
 <!-- Tab panels -->
 <div class="tab-content">
-    <div class="tab-pane active" id="habitual" role="tabpanel" aria-labelledby="habitual-tab">
+    <div class="tab-pane active" id="recent-visits" role="tabpanel" aria-labelledby="recent-visits-tab">
 
-        <table class="table table-sm">
+        <table class="table table-striped table-sm text-center">
             <thead>
                 <tr class="text-justify">
-                    <th scope="col">Id visita</th>
+                    <th scope="col">ID Visita</th>
                     <th scope="col">Fecha</th>
                     <th scope="col">Tipo</th>
                     <th scope="col">Descripción</th>
-                    <th scope="col">CC usuario</th>
-                    <th scope="col">Id producto</th>
-                    <th scope="col">número cuenta cliente</th>
+                    <th scope="col">CC Usuario</th>
+                    <th scope="col">ID Producto</th>
+                    <th scope="col">Número Cuenta Cliente</th>
                 </tr>
             </thead>
-            <tbody id="tablaBody_N">
+            <tbody id="tablaBody_V">
 
             </tbody>
         </table>
     </div>
-
 </div>

@@ -129,3 +129,17 @@ table .btn_delete {
   bottom: 25px;
   left: 20px;
 }
+
+.refresh-inventory{
+  width: 25px;
+  height: 25px;
+  background-image: url(./media/static/refresh-icon.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+  transition: all .2s ease-in-out;
+}
+
+.refresh-inventory:hover{
+  transform: scale(1.1); 
+}

@@ -7,10 +7,8 @@ import {
   getProductById,
 } from "../controllers/db.contoller";
 import { main } from "@popperjs/core";
+import { refreshDynamicContent } from "../handler/events.handler";
 
-// handlers ------------
-import {postProductHandler, updateProductHandler} from '../handler/events.handler'
-// -----------------------
 
 
 router(window.location.hash);
@@ -23,44 +21,49 @@ window.addEventListener("hashchange", () => {
 
 // buscar elemento por id
 // Manejador del evento de búsqueda
-const btnIdSearch = document.getElementById("inventory_btn-search");
-btnIdSearch.addEventListener("click", async () => {
 
-  const productId = document.getElementById("inventarySearchInput").value;
+// const btnIdSearch = document.getElementById("inventory_btn-search");
 
-  try {
-    const product = await getProductById(productId);
-    console.log(product);
+// const invSearch = btnIdSearch.addEventListener("click", async () => {
 
-    // Construir el HTML para mostrar los detalles del producto
-    const productDetailsHTML = `
-      <div>
-        <p><strong>ID:</strong> ${product.Pk_Id_Producto}</p>
-        <p><strong>Nombre:</strong> ${product.Nombre_Producto}</p>
-        <p><strong>Referencia:</strong> ${product.Referencia}</p>
-        <p><strong>Marca:</strong> ${product.Marca}</p>
-        <p><strong>Número de Orden:</strong> ${product.Numero_de_Orden}</p>
-        <p><strong>Fecha de Compra:</strong> ${product.Fecha_de_Compra}</p>
-        <p><strong>Cantidad:</strong> ${product.Cantidad}</p>
-        <p><strong>NIT Empresa Suministradora:</strong> ${product.Fk_NIT_Empresa_Suministradora}</p>
-      </div>
-    `;
+//   const productId = document.getElementById("inventarySearchInput").value;
 
-    // Actualizar el contenido del modal con los detalles del producto
-    const productDetailsContainer = document.getElementById(
-      "product-details-content"
-    );
-    productDetailsContainer.innerHTML = productDetailsHTML;
+//   try {
+//     const product = await getProductById(productId);
+//     console.log(product);
 
-    // Mostrar el modal
-    const productDetailsModal = new bootstrap.Modal(
-      document.getElementById("productDetailsModal")
-    );
-   productDetailsModal.show();
-  } catch (error) {
-    console.error("Error al obtener el producto:", error);
-  }
-});
+//     // Construir el HTML para mostrar los detalles del producto
+//     const productDetailsHTML = `
+//       <div>
+//         <p><strong>ID:</strong> ${product.Pk_Id_Producto}</p>
+//         <p><strong>Nombre:</strong> ${product.Nombre_Producto}</p>
+//         <p><strong>Referencia:</strong> ${product.Referencia}</p>
+//         <p><strong>Marca:</strong> ${product.Marca}</p>
+//         <p><strong>Número de Orden:</strong> ${product.Numero_de_Orden}</p>
+//         <p><strong>Fecha de Compra:</strong> ${product.Fecha_de_Compra}</p>
+//         <p><strong>Cantidad:</strong> ${product.Cantidad}</p>
+//         <p><strong>NIT Empresa Suministradora:</strong> ${product.Fk_NIT_Empresa_Suministradora}</p>
+//       </div>
+//     `;
 
-postProductHandler()
-updateProductHandler()
+//     // Actualizar el contenido del modal con los detalles del producto
+//     const productDetailsContainer = document.getElementById(
+//       "product-details-content"
+//     );
+//     productDetailsContainer.innerHTML = productDetailsHTML;
+
+//     // Mostrar el modal
+//     const productDetailsModal = new bootstrap.Modal(
+//       document.getElementById("productDetailsModal")
+//     );
+//    productDetailsModal.show();
+//   } catch (error) {
+//     console.error("Error al obtener el producto:", error);
+//   }
+// });
+
+
+
+refreshDynamicContent()
+
+

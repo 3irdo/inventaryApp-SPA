@@ -6,6 +6,7 @@ import {
   printVisitas,
   printDataInventario,
 } from "../controllers/index.controller";
+import { postProductHandler, postVisitaHandler, updateProductHandler } from "../handler/events.handler";
 
 function router(route) {
   let root = document.getElementById("root");
@@ -18,11 +19,9 @@ function router(route) {
 
     switch (route) {
       case "#/inventario":
-        return printDataInventario();
+        return printDataInventario(), postProductHandler(),updateProductHandler();
       case "#/h_visita_tecnica":
-        return printVisitas();
-      case "#/trazabilidad":
-        return console.log("historial_visitas");
+        return printVisitas(), postVisitaHandler();
       case "#/admUsuarios":
         return console.log("admUsuarios");
       default:
