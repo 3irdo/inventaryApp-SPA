@@ -39,6 +39,7 @@
         </div>
     </div>
 
+    <!-- -------------------nuevo producto---------------------- -->
 
     <div class="modal modal-dialog-scrollable fade" id="newProductModal" tabindex="-1"
         aria-labelledby="newProductModalLabel" aria-hidden="true">
@@ -52,10 +53,7 @@
                 </div>
                 <div class="modal-body">
                     <form id="inventario-form">
-                        <!-- <div class="mb-3">
-                            <label for="id_producto" class="col-form-label">ID:</label>
-                            <input required type="text" class="form-control" id="id_producto" />
-                        </div> -->
+
                         <div class="mb-3">
                             <label for="nombre_producto" class="col-form-label">Nombre:</label>
                             <input type="text" class="form-control" id="nombre_producto" />
@@ -86,10 +84,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="fecha_compra" class="col-form-label">Fecha de Compra:</label>
-                            <input type="date" 
-                            min= "1980-01-01"
-                            max= "2060-12-31"
-                            class="form-control" id="fecha_compra" />
+                            <input type="date" min="1980-01-01" max="2060-12-31" class="form-control"
+                                id="fecha_compra" />
                         </div>
                         <div class="mb-3">
                             <label for="cantidad" class="col-form-label">Cantidad:</label>
@@ -100,7 +96,8 @@
 
                             <select class="form-select" id="nit_suministradora" required
                                 aria-label="nit_suministradora">
-                                <option value="">Seleciona un proveedor</option>
+                                <option value="">Seleciona un proveedor
+                                </option>
                             </select>
                         </div>
                         <button type="submit" id="agregar-inventario" class="btn btn-primary">Enviar</button>
@@ -122,6 +119,8 @@
         Añadir marcado
     </button>
 
+    <!-- ----------------modal para prodcutos marcados  -->
+
     <div class="modal modal-dialog-scrollable fade text-white" data-bs-theme="dark" id="newProductMarked" tabindex="-1"
         aria-labelledby="newProductMarkedLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -140,31 +139,31 @@
                         </div>
                         <div class="mb-3">
                             <label for="nombre_producto" class="col-form-label">Nombre:</label>
-                            <input type="text" class="form-control" id="nombre_producto" />
+                            <input type="text" class="form-control" id="nombre_producto_M" />
                         </div>
                         <div class="mb-3">
                             <label for="referencia" class="col-form-label">Referencia:</label>
-                            <input type="text" class="form-control" id="referencia" />
+                            <input type="text" class="form-control" id="referencia_M" />
                         </div>
                         <div class="mb-3">
                             <label for="marca" class="col-form-label">Marca:</label>
-                            <input type="text" class="form-control" id="marca" />
+                            <input type="text" class="form-control" id="marca_M" />
                         </div>
                         <div class="mb-3">
                             <label for="num_orden" class="col-form-label">Número de orden:</label>
-                            <input type="text" class="form-control" id="num_orden" />
+                            <input type="text" class="form-control" id="num_orden_M" />
                         </div>
                         <div class="mb-3">
                             <label for="fecha_compra" class="col-form-label">Fecha de Compra:</label>
-                            <input type="text" class="form-control" id="fecha_compra" />
+                            <input type="text" class="form-control" id="fecha_compra_M" />
                         </div>
                         <div class="mb-3">
                             <label for="cantidad" class="col-form-label">Cantidad:</label>
-                            <input type="text" class="form-control" id="cantidad" />
+                            <input type="text" class="form-control" id="cantidad_M" />
                         </div>
                         <div class="mb-3">
                             <label for="nit_suministradora" class="col-form-label">NIT suministradora:</label>
-                            <input type="text" class="form-control" id="nit_suministradora" />
+                            <input type="text" class="form-control" id="nit_suministradora_M" />
                         </div>
                     </form>
                 </div>
@@ -178,6 +177,79 @@
         </div>
     </div>
 </div>
+
+<!-- ------------------------------------------------------>
+
+
+
+<!-- ----------------- modal para actualizar productos ------->
+
+<!-- Modal para editar un producto -->
+<div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editProductModalLabel">Editar Producto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editProductForm">
+                    <input type="hidden" id="edit_product_id" name="edit_product_id">
+
+                    <!-- Campo oculto para almacenar el ID del producto -->
+
+                    <div class="mb-3">
+                        <label for="edit_nombre_producto" class="form-label">Nombre:</label>
+                        <input type="text" class="form-control" id="edit_nombre_producto" name="edit_nombre_producto">
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_referencia" class="form-label">Referencia:</label>
+                        <input type="text" class="form-control" id="edit_referencia" name="edit_referencia">
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_marca" class="form-label">Marca:</label>
+                        <select class="form-select" id="edit_marca" name="edit_marca" aria-label="edit_marca">
+                            <option value="">Selecciona una marca</option>
+                            <option value="SegurCam">SegurCam</option>
+                            <option value="SeguriHome">SeguriHome</option>
+                            <option value="SecureSense">SecureSense</option>
+                            <option value="SmartLock">SmartLock</option>
+                            <option value="VigiCam">VigiCam</option>
+                            <option value="">BiometricAccess</option>
+                            <option value="4KWatch">4KWatch</option>
+                            <option value="SafeGuard">SafeGuard</option>
+                            <option value="InterBuild">InterBuild</option>
+                            <option value="RFIDSecure">RFIDSecure</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_num_orden" class="form-label">Número de orden:</label>
+                        <input type="text" class="form-control" id="edit_num_orden" name="edit_num_orden">
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_fecha_compra" class="form-label">Fecha de Compra:</label>
+                        <input type="date" class="form-control" id="edit_fecha_compra" name="edit_fecha_compra">
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_cantidad" class="form-label">Cantidad:</label>
+                        <input type="text" class="form-control" id="edit_cantidad" name="edit_cantidad">
+                    </div>
+                    <!-- <div class="mb-3">
+                        <label for="edit_nit_suministradora" class="form-label">Empresa suministradora:</label>
+                        <select class="form-select" id="edit_nit_suministradora" name="edit_nit_suministradora" required
+                            aria-label="edit_nit_suministradora">
+                            <option value="">Selecciona un proveedor</option>
+                        </select>
+                    </div> -->
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ------------------------------------------------------>
 
 <!-- Nav tabs -->
 <ul class="nav nav-tabs" id="myTab" role="tablist">

@@ -83,7 +83,14 @@
   }
 }
 
+#overflow-container {
+  overflow-y:auto ;
+  max-height: 90vh;
+}
 
+body {
+  overflow: hidden;
+}
 // .hide {
 //   display: none;
 // }
@@ -119,6 +126,6 @@ table .btn_delete {
 // contendor de alertas
 #liveAlertPlaceholder {
   position: absolute;
-  top: 25px;
-  right: 20px;
+  bottom: 25px;
+  left: 20px;
 }

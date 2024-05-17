@@ -18,8 +18,8 @@ async function getProductById(productId) {
   try {
     const response = await fetch(`http://localhost:3000/inventario/${productId}`);
     const product = await response.json();
-
-    return product;
+    return product[0];
+    
   } catch (error) {
     console.error(`Error al obtener el producto con ID ${productId}:`, error);
     throw error;
@@ -60,7 +60,7 @@ async function updateProduct(productId, updatedData) {
     const updatedProduct = await response.json();
     return updatedProduct;
   } catch (error) {
-    console.error(`Error al actualizar el producto con ID ${productId}:`, error);
+    console.error(error);
     throw error;
   }
 }

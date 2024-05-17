@@ -4,13 +4,14 @@ import loginView from "../views/login.html";
 import homeView from "../views/home.html";
 import inventoryView from "../views/inventory.html";
 import hVisitasView from "../views/historial_visitas.html";
-import deletEditBtns from "../views/buttons_delete_edit.html";
 import {
   getProducts,
   getEmpresas,
   getProductById,
   deleteProduct,
 } from "./db.contoller";
+
+import {updateProductHandler} from '../handler/events.handler'
 
 function Home() {
   const divElement = document.createElement("div");
@@ -36,6 +37,8 @@ async function printDataInventario() {
   contenidoDinamico.innerHTML = inventoryView;
   contenidoDinamico.classList = "fade-in-out";
 
+  
+
   try {
     const inventario_data = await getProducts();
     const empresas_data = await getEmpresas();
@@ -58,7 +61,7 @@ async function printDataInventario() {
         </td>
       `;
       tablaBody_N.appendChild(fila);
-
+      
       // Aquí, después de agregar la fila, agregamos el event listener para el botón de eliminar
       const btn_delete = fila.querySelector(".btn_delete");
       btn_delete.addEventListener("click", async (e) => {
@@ -91,13 +94,15 @@ async function printDataInventario() {
 
           printDataInventario()
           
+          
         } catch (error) {
           console.error("Error al eliminar el producto:", error);
           // Puedes mostrar un mensaje de error al usuario si la eliminación falla
         }
       });
+     
     });
-
+   
     async function printProductByID() {
       const productId = 1;
       try {
@@ -122,6 +127,8 @@ async function printDataInventario() {
     console.error("Error al obtener los datos del inventario:", error);
   }
 }
+
+
 
 async function printVisitas() {
   const contenidoDinamico = document.getElementById("contenidoDinamico");
