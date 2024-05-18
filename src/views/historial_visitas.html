@@ -1,3 +1,5 @@
+<!-- hostorial visitas view --------- -->
+
 <div class="d-flex align-items-center border-bottom gap-2">
     <h2 class="ps-2 flex-fill">Historial de Visitas</h2>
 
@@ -23,17 +25,18 @@
 <!-- Modal para mostrar la descripción de la visita -->
 <div class="modal fade" id="descripcionModal" tabindex="-1" aria-labelledby="descripcionModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="descripcionModalLabel">Descripción de la Visita</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" id="descripcion-content">
-                <!-- Aquí se mostrará la descripción de la visita -->
-            </div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="descripcionModalLabel">Descripción de la Visita</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+        <div class="modal-body" id="descripcion-content">
+          <!-- Aquí se mostrará la descripción de la visita -->
+        </div>
+      </div>
     </div>
-</div>
+  </div>
+  
 
 
 <!-- Modal para mostrar detalles del producto -->
@@ -95,7 +98,7 @@ aria-hidden="true">
                             <textarea class="form-control" id="descripcion"></textarea>
                         </div>
                         <div class="mb-3">
-                            <label for="cc_usuario" class="col-form-label">CC Usuario:</label>
+                            <label for="clienteCC_select_input" class="col-form-label">CC Usuario:</label>
 
                             <select class="form-select" id="clienteCC_select_input" required
                                 aria-label="clienteCC_select_input">
@@ -112,7 +115,7 @@ aria-hidden="true">
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="num_cuenta_cliente" class="col-form-label">Número Cuenta Cliente:</label>
+                            <label for="cuentaClienteSelect" class="col-form-label">Número Cuenta Cliente:</label>
 
                             <select class="form-select" id="cuentaClienteSelect" required
                                 aria-label="cuentaClienteSelect">

@@ -44,6 +44,8 @@ export async function printDataInventario() {
     const selectForm = document.getElementById("nit_suministradora");
 
     inventario_data.forEach((producto) => {
+      
+
       const fila = document.createElement("tr");
       fila.innerHTML = `
         <td>${producto.Pk_Id_Producto}</td>
@@ -63,6 +65,7 @@ export async function printDataInventario() {
           }"><span></span></button>
         </td>
       `;
+
       tablaBody_N.appendChild(fila);
 
       // Aquí, después de agregar la fila, agregamos el event listener para el botón de eliminar
@@ -252,7 +255,12 @@ export async function printDataInventario() {
 //   }
 // }
 
+function showDescription(descripcion) {
+  document.getElementById("descripcion-content").innerText = descripcion;
+}
+
 export async function printVisitas() {
+
   const contenidoDinamico = document.getElementById("contenidoDinamico");
   contenidoDinamico.classList = "fade-in-out";
   contenidoDinamico.innerHTML = hVisitasView;
@@ -263,6 +271,7 @@ export async function printVisitas() {
       getClientes(),
       getProducts(),
     ]);
+
     const clienteCC_select_input = document.getElementById(
       "clienteCC_select_input"
     );
@@ -273,28 +282,51 @@ export async function printVisitas() {
     hVisitas_data.forEach((visita) => {
       const fila = document.createElement("tr");
       fila.innerHTML = `
-        <td>${visita.Pk_Id_Visita_Tecnica}</td>
-        <td>${new Date(visita.Fecha_Visita_Tecnica).toLocaleDateString()}</td>
-        <td>${visita.Tipo_Visita}</td>
-        <td>
+      <td>${visita.Pk_Id_Visita_Tecnica}</td>
+      <td>${new Date(visita.Fecha_Visita_Tecnica).toLocaleDateString()}</td>
+      <td>${visita.Tipo_Visita}</td>
+
+      <td>
           <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#descripcionModal_${
-            visita.Pk_Id_Visita_Tecnica
+            visita.id
           }">
               Ver Descripción
           </button>
-        </td>
-        <td>${visita.Fk_CC_Usuario}</td>
-        <td>${visita.Fk_Id_Producto}</td>
-        <td>${visita.Fk_Numero_Cuenta_Cliente}</td>
-        <td>
-          <button type="button" class="btn_edit rounded btn btn-primary" data-product-id="${
-            visita.Pk_Id_Visita_Tecnica
-          }"><span></span></button>
-          <button type="button" class="btn_delete rounded btn btn-danger" data-product-id="${
-            visita.Pk_Id_Visita_Tecnica
-          }"><span></span></button>
-        </td>
-      `;
+      </td>
+      <!-- Agrega el modal aquí -->
+      <div class="modal fade" id="descripcionModal_${
+        visita.id
+      }" tabindex="-1" aria-labelledby="descripcionModalLabel_${
+          visita.id
+        }" aria-hidden="true">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="descripcionModalLabel_${
+                        visita.id
+                      }">Descripción de la Visita</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                      ${visita.Descripcion_Visita_Tecnica}
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <td>${visita.Fk_CC_Usuario}</td>
+      <td>${visita.Fk_Id_Producto}</td>
+      <td>${visita.Fk_Numero_Cuenta_Cliente}<td>
+
+      <td>
+            <button type="button" class="btn_edit rounded btn btn-primary" data-product-id="${
+              visita.Pk_Id_Visita_Tecnica
+            }"><span></span></button>
+            <button type="button" class="btn_delete rounded btn btn-danger" data-product-id="${
+              visita.Pk_Id_Visita_Tecnica
+            }"><span></span></button>
+          </td>
+    `;
       tablaBody_V.appendChild(fila);
 
       fila.querySelector(".btn_delete").addEventListener("click", async (e) => {
