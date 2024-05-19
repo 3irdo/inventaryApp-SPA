@@ -30,7 +30,20 @@ export async function getLogin(usuario, contrasena) {
   }
 }
 // ---------------------------
+<<<<<<< HEAD
 
+=======
+export async function getUsusarioTecnico() {
+  try {
+    const response = await fetch("http://localhost:3000/Usuario_Tecnico");
+    const usuario_data = await response.json();
+    return usuario_data;
+  } catch (error) {
+    console.error("Error al obtener los datos de los usuarios", error);
+    throw error;
+  }
+}
+>>>>>>> c2a8d2ac2a54a4297afb2068d0d6ebb86b408505
 // -----------------inventario----------------------
 
 export async function addProduct(productData) {
@@ -236,6 +249,7 @@ export async function getClientes() {
     throw error;
   }
 }
+<<<<<<< HEAD
 
 
 // ------------------------ usuarios tecnicos ----------
@@ -249,3 +263,5 @@ export async function getUsusarioTecnico() {
     throw error;
   }
 }
+=======
+>>>>>>> c2a8d2ac2a54a4297afb2068d0d6ebb86b408505

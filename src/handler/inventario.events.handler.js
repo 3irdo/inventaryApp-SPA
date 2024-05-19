@@ -9,7 +9,14 @@ import {
   getVisitaById,
   getLogin,
   } from "../controllers/db.contoller";
+<<<<<<< HEAD:src/handler/inventario.events.handler.js
 
+=======
+import {
+  printDataInventario,
+  showAlert,
+} from "../controllers/index.controller";
+>>>>>>> c2a8d2ac2a54a4297afb2068d0d6ebb86b408505:src/handler/events.handler.js
 
 // función para refrescar el contenido dinamico de inventario
 

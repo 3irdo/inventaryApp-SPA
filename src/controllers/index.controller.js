@@ -45,6 +45,8 @@ export async function printDataInventario() {
     const tablaBody_N = document.getElementById("tablaBody_N");
 
     inventario_data.forEach((producto) => {
+      
+
       const fila = document.createElement("tr");
       fila.innerHTML = `
         <td>${producto.Pk_Id_Producto}</td>
@@ -120,12 +122,144 @@ export async function printDataInventario() {
   }
 }
 
+<<<<<<< HEAD
+=======
+// ---------------------visitas-------------------------
+
+// export async function printVisitas() {
+//   const contenidoDinamico = document.getElementById("contenidoDinamico");
+//   contenidoDinamico.classList = "fade-in-out";
+//   contenidoDinamico.innerHTML = hVisitasView;
+
+//   try {
+//     const hVisitas_data = await getVisitas();
+//     const clientes_data = await getClientes();
+//     const inventario_data = await getProducts();
+//     const clienteCC_select_input = document.getElementById(
+//       "clienteCC_select_input"
+//     );
+//     const cuentaCliente_select = document.getElementById("cuentaClienteSelect");
+//     const clienteProducto_select = document.getElementById("clienteProducto");
+
+//     hVisitas_data.forEach((visita) => {
+//       const fila = document.createElement("tr");
+//       fila.innerHTML = `
+//       <td>${visita.Pk_Id_Visita_Tecnica}</td>
+//       <td>${new Date(visita.Fecha_Visita_Tecnica).toLocaleDateString()}</td>
+//       <td>${visita.Tipo_Visita}</td>
+
+//       <td>
+//           <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#descripcionModal_${
+//             visita.id
+//           }">
+//               Ver Descripción
+//           </button>
+//       </td>
+//       <!-- Agrega el modal aquí -->
+//       <div class="modal fade" id="descripcionModal_${
+//         visita.id
+//       }" tabindex="-1" aria-labelledby="descripcionModalLabel_${
+//           visita.id
+//         }" aria-hidden="true">
+//           <div class="modal-dialog">
+//               <div class="modal-content">
+//                   <div class="modal-header">
+//                       <h5 class="modal-title" id="descripcionModalLabel_${
+//                         visita.id
+//                       }">Descripción de la Visita</h5>
+//                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+//                   </div>
+//                   <div class="modal-body">
+//                       ${visita.Descripcion_Visita_Tecnica}
+//                   </div>
+//               </div>
+//           </div>
+//       </div>
+
+//       <td>${visita.Fk_CC_Usuario}</td>
+//       <td>${visita.Fk_Id_Producto}</td>
+//       <td>${visita.Fk_Numero_Cuenta_Cliente}<td>
+
+//       <td>
+//             <button type="button" class="btn_edit rounded btn btn-primary" data-product-id="${
+//               visita.Pk_Id_Visita_Tecnica
+//             }"><span></span></button>
+//             <button type="button" class="btn_delete rounded btn btn-danger" data-product-id="${
+//               visita.Pk_Id_Visita_Tecnica
+//             }"><span></span></button>
+//           </td>
+//       `;
+//         tablaBody_V.appendChild(fila);
+
+//       const btn_delete = fila.querySelector(".btn_delete");
+//       btn_delete.addEventListener("click", async (e) => {
+//         try {
+//           const visitaId = e.target.dataset.productId;
+//           const deleteP = await deleteVisita(visitaId);
+
+//           const alertPlaceholder = document.getElementById(
+//             "liveAlertPlaceholder"
+//           );
+//           const appendAlert = (message, type) => {
+//             const wrapper = document.createElement("div");
+//             wrapper.innerHTML = [
+//               `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+//               `   <div>${message}</div>`,
+//               '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+//               "</div>",
+//             ].join("");
+
+//             alertPlaceholder.append(wrapper);
+//           };
+
+//           if (deleteP) {
+//             appendAlert("Visita eliminado exitosamente", "danger");
+//           }
+//           printVisitas()
+//         } catch (error) {
+//           console.error(error);
+//         }
+//       });
+//     });
+
+//     clientes_data.forEach((cliente) => {
+//       const optionElement = document.createElement("option");
+//       optionElement.value = cliente.Cedula_Cliente;
+//       optionElement.textContent = `${cliente.Nombre_Cliente}  ${cliente.Apellido_Cliente} CC: ${cliente.Cedula_Cliente} `;
+//       clienteCC_select_input.appendChild(optionElement);
+//     });
+
+//     clientes_data.forEach((cliente) => {
+//       const optionElement = document.createElement("option");
+//       optionElement.value = cliente.Pk_Numero_Cuenta_Cliente;
+//       optionElement.textContent = `${cliente.Nombre_Cliente}  ${cliente.Apellido_Cliente} CC: ${cliente.Pk_Numero_Cuenta_Cliente} `;
+//       cuentaCliente_select.appendChild(optionElement);
+//     });
+
+//     inventario_data.forEach((product) => {
+//       const optionElement = document.createElement("option");
+//       optionElement.value = product.Pk_Id_Producto;
+//       optionElement.textContent = `${product.Nombre_Producto} ID: ${product.Referencia} `;
+//       clienteProducto_select.appendChild(optionElement);
+//     });
+//   } catch (error) {
+//     console.error(error);
+//   }
+// }
+
+function showDescription(descripcion) {
+  document.getElementById("descripcion-content").innerText = descripcion;
+}
+
+>>>>>>> c2a8d2ac2a54a4297afb2068d0d6ebb86b408505
 export async function printVisitas() {
+
   const contenidoDinamico = document.getElementById("contenidoDinamico");
   contenidoDinamico.classList = "fade-in-out";
   contenidoDinamico.innerHTML = hVisitasView;
 
   try {
+<<<<<<< HEAD
      const [hVisitas_data, clientes_data, inventario_data, tecnicos_data] =
       await Promise.all([
         getVisitas(),
@@ -133,6 +267,13 @@ export async function printVisitas() {
         getProducts(),
         getUsusarioTecnico(),
       ]);
+=======
+    const [hVisitas_data, clientes_data, inventario_data] = await Promise.all([
+      getVisitas(),
+      getClientes(),
+      getProducts(),
+    ]);
+>>>>>>> c2a8d2ac2a54a4297afb2068d0d6ebb86b408505
 
     const clienteCC_select_input = document.getElementById(
       "clienteCC_select_input"
@@ -150,13 +291,14 @@ export async function printVisitas() {
 
       <td>
           <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#descripcionModal_${
-            visita.Pk_Id_Visita_Tecnica
+            visita.id
           }">
               Ver Descripción
           </button>
       </td>
       <!-- Agrega el modal aquí -->
       <div class="modal fade" id="descripcionModal_${
+<<<<<<< HEAD
         visita.Pk_Id_Visita_Tecnica
       }" tabindex="-1" aria-labelledby="descripcionModalLabel_${
         visita.Pk_Id_Visita_Tecnica
@@ -170,6 +312,21 @@ export async function printVisitas() {
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body text-wrap">
+=======
+        visita.id
+      }" tabindex="-1" aria-labelledby="descripcionModalLabel_${
+          visita.id
+        }" aria-hidden="true">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="descripcionModalLabel_${
+                        visita.id
+                      }">Descripción de la Visita</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+>>>>>>> c2a8d2ac2a54a4297afb2068d0d6ebb86b408505
                       ${visita.Descripcion_Visita_Tecnica}
                   </div>
               </div>
@@ -181,7 +338,11 @@ export async function printVisitas() {
       <td>${visita.Fk_Numero_Cuenta_Cliente}<td>
 
       <td>
+<<<<<<< HEAD
             <button type="button" class="btn_edit rounded btn btn-primary" data-visita-id="${
+=======
+            <button type="button" class="btn_edit rounded btn btn-primary" data-product-id="${
+>>>>>>> c2a8d2ac2a54a4297afb2068d0d6ebb86b408505
               visita.Pk_Id_Visita_Tecnica
             }"><span></span></button>
             <button type="button" class="btn_delete rounded btn btn-danger" data-product-id="${
