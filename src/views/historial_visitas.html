@@ -1,12 +1,13 @@
+<!-- hostorial visitas view --------- -->
+
 <div class="d-flex align-items-center border-bottom gap-2">
     <h2 class="ps-2 flex-fill">Historial de Visitas</h2>
 
     <!-- Barra de búsqueda -->
     <div class="col-4 h-75 align-middle d-flex">
-
-        <input id="inventarySearchInput" class="form-control mr-sm-2" type="search" placeholder="Search"
+        <input id="visitaSearchInput" class="form-control mr-sm-2" type="search" placeholder="Search"
             aria-label="Search" />
-        <button id="inventory_btn-search" class="btn btn-outline-dark my-2 my-sm-0" type="button">
+        <button id="visita_btn-search" class="btn btn-outline-dark my-2 my-sm-0" type="button">
             Search
         </button>
     </div>
@@ -18,57 +19,6 @@
     </button>
 
 </div>
-   
-
-<!-- Modal para mostrar la descripción de la visita -->
-<div class="modal fade" id="descripcionModal" tabindex="-1" aria-labelledby="descripcionModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="descripcionModalLabel">Descripción de la Visita</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" id="descripcion-content">
-                <!-- Aquí se mostrará la descripción de la visita -->
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!-- Modal para mostrar detalles del producto -->
-<div class="modal fade" id="productDetailsModal" tabindex="-1" aria-labelledby="productDetailsModalLabel"
-aria-hidden="true">
-<div class="modal-dialog">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="productDetailsModalLabel">Detalles del Producto</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body" id="product-details-content">
-            <!-- Aquí se mostrarán los detalles del producto -->
-        </div>
-    </div>
-</div>
-</div>
-
-<!-- Modal para mostrar detalles del producto -->
-<div class="modal fade" id="visitaDetailsModal" tabindex="-1" aria-labelledby="visitaDetailsModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="visitaDetailsModalLabel">Detalles del Producto</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" id="visita-details-content">
-                <!-- Aquí se mostrarán los detalles del producto -->
-            </div>
-        </div>
-    </div>
-</div>
-
-
 
     <!-- Modal para añadir una nueva visita -->
     <div class="modal fade" id="newVisitModal" tabindex="-1" aria-labelledby="newVisitModalLabel" aria-hidden="true">
@@ -95,7 +45,7 @@ aria-hidden="true">
                             <textarea class="form-control" id="descripcion"></textarea>
                         </div>
                         <div class="mb-3">
-                            <label for="cc_usuario" class="col-form-label">CC Usuario:</label>
+                            <label for="clienteCC_select_input" class="col-form-label">CC Técnico:</label>
 
                             <select class="form-select" id="clienteCC_select_input" required
                                 aria-label="clienteCC_select_input">
@@ -112,7 +62,7 @@ aria-hidden="true">
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="num_cuenta_cliente" class="col-form-label">Número Cuenta Cliente:</label>
+                            <label for="cuentaClienteSelect" class="col-form-label">Número Cuenta Cliente:</label>
 
                             <select class="form-select" id="cuentaClienteSelect" required
                                 aria-label="cuentaClienteSelect">
@@ -128,6 +78,71 @@ aria-hidden="true">
         </div>
     </div>
 </div>
+
+
+<!-- ------------------------modal para editar visita ----------------- -->
+
+<div class="modal fade" id="editVisitModal" tabindex="-1" aria-labelledby="editVisitModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="editVisitModalLabel">Editar Visita</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="edit-visit-form">
+                    <div class="mb-3">
+                        <label for="edit_fecha_visita" class="col-form-label">Fecha:</label>
+                        <input type="date" class="form-control" id="edit_fecha_visita" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_tipo_visita" class="col-form-label">Tipo:</label>
+                        <input type="text" class="form-control" id="edit_tipo_visita" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_descripcion" class="col-form-label">Descripción:</label>
+                        <textarea class="form-control" id="edit_descripcion"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_clienteCC_select_input" class="col-form-label">CC Técnico:</label>
+                        <select class="form-select" id="edit_clienteCC_select_input" required aria-label="edit_clienteCC_select_input">
+                            <option value="">Seleciona un usuario</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_clienteProducto" class="col-form-label">ID Producto:</label>
+                        <select class="form-select" id="edit_clienteProducto" required aria-label="edit_clienteProduct">
+                            <option value="">seleccione un producto</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_cuentaClienteSelect" class="col-form-label">Número Cuenta Cliente:</label>
+                        <select class="form-select" id="edit_cuentaClienteSelect" required aria-label="edit_cuentaClienteSelect">
+                            <option value="">Seleciona una cuenta</option>
+                        </select>
+                    </div>
+                    <button type="submit" id="update-visita" class="btn btn-primary">Actualizar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ---------------------modal mostrar visita por id ----------------- -->
+<div class="modal fade" id="visitaDetailsModal" tabindex="-1" aria-labelledby="visitaDetailsModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="visitaDetailsModalLabel">Detalles del Producto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="visita-details-content">
+                    <!-- Aquí se mostrarán los detalles del producto -->
+                </div>
+            </div>
+        </div>
+    </div>
 
 <!-- Nav tabs -->
 <ul class="nav nav-tabs" id="myTab" role="tablist">

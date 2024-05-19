@@ -7,7 +7,7 @@ import {
   getProductById,
 } from "../controllers/db.contoller";
 import { main } from "@popperjs/core";
-import { refreshDynamicContent } from "../handler/events.handler";
+
 
 
 
@@ -63,7 +63,5 @@ window.addEventListener("hashchange", () => {
 // });
 
 
-
-refreshDynamicContent()
 
 

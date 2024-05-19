@@ -7,26 +7,18 @@ import {
   updateProduct,
   addVisita,
   getVisitaById,
-} from "../controllers/db.contoller";
-import { printDataInventario, showAlert } from "../controllers/index.controller";
+  getLogin,
+  } from "../controllers/db.contoller";
+
 
 // función para refrescar el contenido dinamico de inventario
 
-function refreshDynamicContent() {
-  document.addEventListener("click", (event) => {
-    if (event.target.classList.contains("refresh-inventory")) {
-      printDataInventario();
-    }
-  });
-}
 
-function refreshWindow(delay = 3000) {
+export function refreshWindow(delay = 3000) {
   setTimeout(() => {
     location.reload();
   }, delay);
 }
-
-
 
 // manejador buscar producto por id
 export function SearchProductId() {
@@ -73,7 +65,7 @@ export function SearchProductId() {
 // -----------------------------
 
 // manejador para añadir inventario -----------
-function postProductHandler() {
+export function postProductHandler() {
   document
     .getElementById("inventario-form")
     .addEventListener("submit", async (event) => {
@@ -130,9 +122,9 @@ function postProductHandler() {
 
         document.getElementById("inventario-form").reset();
 
-        // refreshWindow()
+        refreshWindow()
 
-        // Aquí puedes hacer algo con el nuevo producto, como mostrar un mensaje de éxito o actualizar la lista de productos en la interfaz de usuario
+    
       } catch (error) {
         console.error("Error al añadir el producto:", error);
         // Aquí puedes manejar el error, como mostrar un mensaje de error al usuario
@@ -140,11 +132,13 @@ function postProductHandler() {
     });
 }
 
-// Manejador de evento para el botón de edición de productos
-async function updateProductHandler() {
+
+
+export async function updateProductHandler() {
   document.addEventListener("click", async (event) => {
     if (event.target.classList.contains("btn_edit")) {
       const productId = event.target.dataset.productId;
+      
       try {
         // Obtener el producto por su ID
         const product = await getProductById(productId);
@@ -234,108 +228,94 @@ async function updateProductHandler() {
 
 // Manejador para añadir visita técnica-----------
 
-// export function postVisitaHandler() {
-//   document
-//     .getElementById("visit-form")
-//     .addEventListener("submit", async (event) => {
-//       event.preventDefault(); // Evitar que el formulario se envíe automáticamente
-
-//       const fecha_visita = document.getElementById("fecha_visita").value;
-//       const tipo_visita = document.getElementById("tipo_visita").value;
-//       const descripcion = document.getElementById("descripcion").value;
-//       const cc_usuario = document.getElementById(
-//         "clienteCC_select_input"
-//       ).value;
-//       const id_producto = document.getElementById("clienteProducto").value;
-//       const num_cuenta_cliente = document.getElementById(
-//         "cuentaClienteSelect"
-//       ).value;
-
-//       // Crear objeto con los datos de la visita
-//       const visitaData = {
-//         fecha_visita,
-//         tipo_visita,
-//         descripcion,
-//         cc_usuario,
-//         id_producto,
-//         num_cuenta_cliente,
-//       };
-
-//       try {
-//         // Agregar la visita usando la función del controlador de la base de datos
-//         const newVisita = await addVisita(visitaData);
-
-//         const alertPlaceholder = document.getElementById(
-//           "liveAlertPlaceholder"
-//         );
-//         const appendAlert = (message, type) => {
-//           const wrapper = document.createElement("div");
-//           wrapper.innerHTML = [
-//             `<div class="alert alert-${type} alert-dismissible" role="alert">`,
-//             `   <div>${message}</div>`,
-//             '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
-//             "</div>",
-//           ].join("");
-
-//           alertPlaceholder.append(wrapper);
-//         };
-
-//         if (newVisita && newVisita.success) {
-//           appendAlert("Visita añadida exitosamente", "success");
-//         }
-
-//         // Cerrar el modal después de agregar la visita
-//         const newVisitModal = bootstrap.Modal.getInstance(
-//           document.getElementById("newVisitModal")
-//         );
-//         newVisitModal.hide();
-
-//         // Limpiar el formulario después de agregar la visita
-//         document.getElementById("visit-form").reset();
-
-//         // Actualizar la ventana después de agregar la visita
-//         refreshWindow();
-//       } catch (error) {
-//         console.error("Error al añadir la visita:", error);
-//         appendAlert("Error al añadir la visita", "danger");
-//         // Manejar el error, como mostrar un mensaje de error al usuario
-//       }
-//     });
-// }
-
 export function postVisitaHandler() {
-  document.getElementById("visit-form").addEventListener("submit", async (event) => {
-    event.preventDefault();
+  document
+    .getElementById("visit-form")
+    .addEventListener("submit", async (event) => {
+      event.preventDefault(); // Evitar que el formulario se envíe automáticamente
 
-    const visitaData = {
-      fecha_visita: document.getElementById("fecha_visita").value,
-      tipo_visita: document.getElementById("tipo_visita").value,
-      descripcion: document.getElementById("descripcion").value,
-      cc_usuario: document.getElementById("clienteCC_select_input").value,
-      id_producto: document.getElementById("clienteProducto").value,
-      num_cuenta_cliente: document.getElementById("cuentaClienteSelect").value,
-    };
+      const fecha_visita = document.getElementById("fecha_visita").value;
+      const tipo_visita = document.getElementById("tipo_visita").value;
+      const descripcion = document.getElementById("descripcion").value;
+      const cc_usuario = document.getElementById(
+        "clienteCC_select_input"
+      ).value;
+      const id_producto = document.getElementById("clienteProducto").value;
+      const num_cuenta_cliente = document.getElementById(
+        "cuentaClienteSelect"
+      ).value;
 
-    try {
-      const newVisita = await addVisita(visitaData);
-      if (newVisita && newVisita.success) {
-        showAlert("Visita añadida exitosamente", "success");
-        bootstrap.Modal.getInstance(document.getElementById("newVisitModal")).hide();
+      // Crear objeto con los datos de la visita
+      const visitaData = {
+        fecha_visita,
+        tipo_visita,
+        descripcion,
+        cc_usuario,
+        id_producto,
+        num_cuenta_cliente,
+      };
+
+      try {
+        // Agregar la visita usando la función del controlador de la base de datos
+        const newVisita = await addVisita(visitaData);
+
+        const alertPlaceholder = document.getElementById(
+          "liveAlertPlaceholder"
+        );
+        const appendAlert = (message, type) => {
+          const wrapper = document.createElement("div");
+          wrapper.innerHTML = [
+            `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+            `   <div>${message}</div>`,
+            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+            "</div>",
+          ].join("");
+
+          alertPlaceholder.append(wrapper);
+        };
+
+        if (newVisita && newVisita.success) {
+          appendAlert("Visita añadida exitosamente", "success");
+        }
+
+        // Cerrar el modal después de agregar la visita
+        const newVisitModal = bootstrap.Modal.getInstance(
+          document.getElementById("newVisitModal")
+        );
+        newVisitModal.hide();
+
+        // Limpiar el formulario después de agregar la visita
         document.getElementById("visit-form").reset();
+
+        // Actualizar la ventana después de agregar la visita
         refreshWindow();
+      } catch (error) {
+        console.error("Error al añadir la visita:", error);
+        appendAlert("Error al añadir la visita", "danger");
+        // Manejar el error, como mostrar un mensaje de error al usuario
       }
-    } catch (error) {
-      console.error("Error al añadir la visita:", error);
-      showAlert("Error al añadir la visita", "danger");
-    }
-  });
+    });
 }
+
+
+
+// manejador mostrar descripción visitas
 
 // manejador buscar visita por id
 
-
-
-export { updateProductHandler, postProductHandler, refreshDynamicContent };
-
-
-
+// ---------------- handler login -----------------
+export async function loginHandler() {
+  document.addEventListener('DOMContentLoaded', () => {
+    const btnLogin = document.getElementById('btnLogin');
+    btnLogin.addEventListener('click', async () => {
+      const usuario = document.getElementById('usuario').value;
+      const contrasena = document.getElementById('contrasena').value;
+      
+      try {
+        const loginReq = await getLogin(usuario, contrasena);
+      } catch (error) {
+        console.error('Error al manejar el login:', error);
+      }
+    });
+  });
+}
