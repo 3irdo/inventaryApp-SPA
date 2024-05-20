@@ -5,21 +5,19 @@ import {
   printVisitas,
   printDataInventario,
 } from "../controllers/index.controller";
-<<<<<<< HEAD
 import {
   SearchProductId,
   loginHandler,
   postProductHandler,
   updateProductHandler,
 } from "../handler/inventario.events.handler";
+import { postUsuarioTecnico, printUsuarios } from "../handler/usuarios.handler";
+
 import {
   SearchVisitaId,
   postVisitaTecnicaHandler,
   updateVisitaTecnica,
 } from "../handler/visitas.event.handler";
-=======
-import { SearchProductId, loginHandler, postProductHandler, postVisitaHandler, updateProductHandler } from "../handler/events.handler";
->>>>>>> c2a8d2ac2a54a4297afb2068d0d6ebb86b408505
 
 function router(route) {
   let root = document.getElementById("root");
@@ -40,14 +38,10 @@ function router(route) {
         break;
       case "#/h_visita_tecnica":
         printVisitas();
-<<<<<<< HEAD
         postVisitaTecnicaHandler(), updateVisitaTecnica(), SearchVisitaId();
-=======
-        postVisitaHandler();
->>>>>>> c2a8d2ac2a54a4297afb2068d0d6ebb86b408505
         break;
       case "#/admUsuarios":
-        console.log("admUsuarios");
+        printUsuarios(), postUsuarioTecnico()
         break;
       default:
         console.log("404");

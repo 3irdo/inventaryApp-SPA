@@ -10,7 +10,7 @@ export async function getLogin(usuario, contrasena) {
     });
 
     if (response.ok) {
-      const userName = document.getElementById('bnt_userLoged');
+      const userName = document.getElementById("bnt_userLoged");
       if (userName) {
         const userData = await getUsuarioTecnico();
         userData.forEach((user) => {
@@ -30,20 +30,7 @@ export async function getLogin(usuario, contrasena) {
   }
 }
 // ---------------------------
-<<<<<<< HEAD
 
-=======
-export async function getUsusarioTecnico() {
-  try {
-    const response = await fetch("http://localhost:3000/Usuario_Tecnico");
-    const usuario_data = await response.json();
-    return usuario_data;
-  } catch (error) {
-    console.error("Error al obtener los datos de los usuarios", error);
-    throw error;
-  }
-}
->>>>>>> c2a8d2ac2a54a4297afb2068d0d6ebb86b408505
 // -----------------inventario----------------------
 
 export async function addProduct(productData) {
@@ -63,8 +50,6 @@ export async function addProduct(productData) {
     throw error;
   }
 }
-
-
 
 export async function getProducts() {
   try {
@@ -132,7 +117,6 @@ export async function deleteProduct(productId) {
 
 // ------------------------visitas-----------------
 
-
 export async function addVisita(visitaData) {
   try {
     const response = await fetch("http://localhost:3000/Visita_Tecnica/", {
@@ -150,6 +134,9 @@ export async function addVisita(visitaData) {
     throw error;
   }
 }
+
+
+
 
 export async function getVisitas() {
   try {
@@ -249,19 +236,49 @@ export async function getClientes() {
     throw error;
   }
 }
-<<<<<<< HEAD
-
 
 // ------------------------ usuarios tecnicos ----------
-export async function getUsusarioTecnico() {
+export async function getUsuarioTecnico() {
   try {
     const response = await fetch("http://localhost:3000/Usuario_Tecnico");
     const usuario_data = await response.json();
+    console.log(usuario_data)
     return usuario_data;
+    
   } catch (error) {
     console.error("Error al obtener los datos de los usuarios", error);
     throw error;
   }
 }
-=======
->>>>>>> c2a8d2ac2a54a4297afb2068d0d6ebb86b408505
+
+export async function addUsuarioTecnico(userData){
+  try {
+      const response = await fetch("http://localhost:3000/Usuario_Tecnico",{
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userData)
+      });
+
+      const newUser = await response.json()
+      console.log(newUser)
+      return newUser
+
+  } catch (error) {
+      console.error("Error al agregar el nuevo usuario:", error);
+      throw error;
+    }
+}
+
+export async function closeConnections() {
+  try {
+    const response = await fetch("http://localhost:3000/close-connections", {
+      method: "POST",
+    });
+    const result = await response.json();
+    console.log(result.message);
+  } catch (error) {
+    console.error("Error al cerrar conexiones:", error);
+  }
+}

@@ -9,7 +9,10 @@ import {
   getVisitaById,
   getLogin,
   } from "../controllers/db.contoller";
-
+import {
+  printDataInventario,
+  showAlert,
+} from "../controllers/index.controller";
 
 // función para refrescar el contenido dinamico de inventario
 
@@ -122,9 +125,9 @@ export function postProductHandler() {
 
         document.getElementById("inventario-form").reset();
 
-        refreshWindow()
+        // refreshWindow()
 
-    
+        // Aquí puedes hacer algo con el nuevo producto, como mostrar un mensaje de éxito o actualizar la lista de productos en la interfaz de usuario
       } catch (error) {
         console.error("Error al añadir el producto:", error);
         // Aquí puedes manejar el error, como mostrar un mensaje de error al usuario
@@ -138,7 +141,6 @@ export async function updateProductHandler() {
   document.addEventListener("click", async (event) => {
     if (event.target.classList.contains("btn_edit")) {
       const productId = event.target.dataset.productId;
-      
       try {
         // Obtener el producto por su ID
         const product = await getProductById(productId);

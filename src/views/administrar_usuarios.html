@@ -1,0 +1,139 @@
+<!-- Administración de Usuarios -->
+
+<div class="d-flex align-items-center border-bottom gap-2">
+    <h2 class="ps-2 flex-fill">Administración de Usuarios</h2>
+
+    <!-- Barra de búsqueda -->
+    <div class="col-4 h-75 align-middle d-flex">
+        <input id="usuarioSearchInput" class="form-control mr-sm-2" type="search" placeholder="Buscar usuario"
+            aria-label="Buscar usuario" />
+        <button id="usuario_btn-search" class="btn btn-outline-dark my-2 my-sm-0" type="button">
+            Buscar
+        </button>
+    </div>
+
+    <!-- Botón para añadir un nuevo usuario -->
+    <button type="button" class="btn btn-info h-75" data-bs-toggle="modal" data-bs-target="#newUserModal"
+        data-bs-whatever="@getbootstrap">
+        Añadir Usuario
+    </button>
+</div>
+
+<!-- Modal para añadir un nuevo usuario -->
+<div class="modal fade" id="newUserModal" tabindex="-1" aria-labelledby="newUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="newUserModalLabel">
+                    Nuevo Usuario
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="user-form">
+                    <div class="mb-3">
+                        <label for="nombre_usuario" class="col-form-label">Nombre:</label>
+                        <input type="text" class="form-control" id="nombre_usuario" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="cc_usuario" class="col-form-label">CC:</label>
+                        <input type="text" class="form-control" id="cc_usuario" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="email_usuario" class="col-form-label">Email:</label>
+                        <input type="email" class="form-control" id="email_usuario" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="rol_usuario" class="col-form-label">Rol:</label>
+                        <input type="text" class="form-control" id="rol_usuario" />
+                    </div>
+                    
+                    <button type="submit" id="agregar-usuario" class="btn btn-primary">Enviar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para editar usuario -->
+<div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="editUserModalLabel">Editar Usuario</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="edit-user-form">
+                    <div class="mb-3">
+                        <label for="edit_nombre_usuario" class="col-form-label">Nombre:</label>
+                        <input type="text" class="form-control" id="edit_nombre_usuario" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_cc_usuario" class="col-form-label">CC:</label>
+                        <input type="text" class="form-control" id="edit_cc_usuario" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_email_usuario" class="col-form-label">Email:</label>
+                        <input type="email" class="form-control" id="edit_email_usuario" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_rol_usuario" class="col-form-label">Rol:</label>
+                        <input type="text" class="form-control" id="edit_rol_usuario" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_password_usuario" class="col-form-label">Contraseña:</label>
+                        <input type="password" class="form-control" id="edit_password_usuario" />
+                    </div>
+                    <button type="submit" id="update-usuario" class="btn btn-primary">Actualizar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal mostrar detalles del usuario por ID -->
+<div class="modal fade" id="userDetailsModal" tabindex="-1" aria-labelledby="userDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="userDetailsModalLabel">Detalles del Usuario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="user-details-content">
+                <!-- Aquí se mostrarán los detalles del usuario -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="recent-users-tab" data-bs-toggle="tab" data-bs-target="#recent-users"
+            type="button" role="tab" aria-controls="recent-users" aria-selected="true">
+            Usuarios Recientes
+        </button>
+    </li>
+</ul>
+
+<!-- Tab panels -->
+<div class="tab-content">
+    <div class="tab-pane active" id="recent-users" role="tabpanel" aria-labelledby="recent-users-tab">
+
+        <table class="table table-striped table-sm text-center">
+            <thead>
+                <tr class="text-justify">
+                    <th scope="col">ID Usuario</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Teléfono</th>
+                    <th scope="col">Email</th>
+                </tr>
+            </thead>
+            <tbody id="tablaBody_U">
+
+            </tbody>
+        </table>
+    </div>
+</div>

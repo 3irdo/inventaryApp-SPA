@@ -2,7 +2,7 @@ import * as bootstrap from "bootstrap";
 import {
   getClientes,
   getProducts,
-  getUsusarioTecnico,
+  getUsuarioTecnico,
   getVisitaById,
   getVisitas,
   updateVisita,
@@ -67,7 +67,7 @@ export async function updateVisitaTecnica() {
             await Promise.all([
               getClientes(),
               getProducts(),
-              getUsusarioTecnico(),
+              getUsuarioTecnico(),
             ]);
           const editModalLabel = document.getElementById("editVisitModalLabel");
           const editForm = document.getElementById("edit-visit-form");
@@ -189,7 +189,7 @@ export function SearchVisitaId() {
         getVisitaById(visitaId),
         getClientes(),
         getProducts(),
-        getUsusarioTecnico(),
+        getUsuarioTecnico(),
       ]);
 
       const visitaDetailsHTML = `
