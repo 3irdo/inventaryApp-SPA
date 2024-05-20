@@ -1,3 +1,4 @@
+import indexView from "../views/indexView.html";
 import loginView from "../views/login.html";
 import homeView from "../views/home.html";
 import inventoryView from "../views/inventory.html";
@@ -5,13 +6,20 @@ import hVisitasView from "../views/historial_visitas.html";
 import {
   getProducts,
   getEmpresas,
-  getProductById,
   deleteProduct,
   getVisitas,
   getClientes,
   deleteVisita,
   getUsuarioTecnico,
 } from "./db.contoller";
+import { refreshWindow } from "../handler/inventario.events.handler";
+
+export function Index() {
+  const divElement = document.createElement("div");
+  divElement.innerHTML = indexView;
+  divElement.classList = "container index-container";
+  return divElement;
+}
 
 export function Home() {
   const divElement = document.createElement("div");
@@ -97,6 +105,7 @@ export async function printDataInventario() {
             }
 
             printDataInventario();
+            refreshWindow();
           } catch (error) {
             console.error("Error al eliminar el producto:", error);
             // Puedes mostrar un mensaje de error al usuario si la eliminación falla
@@ -105,7 +114,6 @@ export async function printDataInventario() {
       });
     });
 
-   
     // este foreach llama los datos de la tabla empresas para mostrarlas en el formulario de inventario y poder elegir un nit ya existente
     empresas_data.forEach((empresa) => {
       const optionElement = document.createElement("option");
@@ -126,7 +134,7 @@ export async function printVisitas() {
   contenidoDinamico.innerHTML = hVisitasView;
 
   try {
-     const [hVisitas_data, clientes_data, inventario_data, tecnicos_data] =
+    const [hVisitas_data, clientes_data, inventario_data, tecnicos_data] =
       await Promise.all([
         getVisitas(),
         getClientes(),
@@ -181,7 +189,7 @@ export async function printVisitas() {
       <td>${visita.Fk_Numero_Cuenta_Cliente}<td>
 
       <td>
-            <button type="button" class="btn_edit rounded btn btn-primary" data-visita-id="${
+            <button type="button" class="btn_edit_visita rounded btn btn-primary" data-visita-id="${
               visita.Pk_Id_Visita_Tecnica
             }"><span></span></button>
             <button type="button" class="btn_delete rounded btn btn-danger" data-product-id="${
@@ -191,6 +199,8 @@ export async function printVisitas() {
     `;
       tablaBody_V.appendChild(fila);
 
+      // eliminar visita
+
       fila.querySelector(".btn_delete").addEventListener("click", async (e) => {
         if (confirm("¿Estás seguro de que deseas eliminar esta visita?")) {
           try {
@@ -199,6 +209,7 @@ export async function printVisitas() {
             if (deleteP) {
               showAlert("Visita eliminada exitosamente", "danger");
               printVisitas();
+              refreshWindow();
             }
           } catch (error) {
             console.error(error);

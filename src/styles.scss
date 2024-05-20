@@ -107,7 +107,7 @@ body {
 //   overflow-x: hidden;
 // }
 
-table .btn_edit {
+table .btn_edit, .btn_edit_visita, .btn_edit_user{
   width:25px;
   height: 25px;
   background-image: url(./media/static/edit.svg);
@@ -147,3 +147,37 @@ table .btn_delete {
 
 
 /* Estilos para evitar desbordamiento del contenido del modal */
+body {
+ 
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.index-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+h1 .h1-index {
+  font-size: 3.5rem;
+  color: #343a40;
+  margin-bottom: 20px;
+}
+.index-p {
+  font-size: 1.2rem;
+  color: #6c757d;
+  margin-bottom: 40px;
+  text-align: center;
+}
+.btn-index {
+  background-color: #007bff;
+  border-color: #007bff;
+  font-size: 1.2rem;
+  padding: 10px 30px;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+}
+.btn-index:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}

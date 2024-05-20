@@ -8,13 +8,12 @@ import {
   addVisita,
   getVisitaById,
   getLogin,
-  } from "../controllers/db.contoller";
-
+  getEmpresaById,
+} from "../controllers/db.contoller";
 
 // función para refrescar el contenido dinamico de inventario
 
-
-export function refreshWindow(delay = 3000) {
+export function refreshWindow(delay = 2000) {
   setTimeout(() => {
     location.reload();
   }, delay);
@@ -39,10 +38,11 @@ export function SearchProductId() {
         <p><strong>Referencia:</strong> ${product.Referencia}</p>
         <p><strong>Marca:</strong> ${product.Marca}</p>
         <p><strong>Número de Orden:</strong> ${product.Numero_de_Orden}</p>
-        <p><strong>Fecha de Compra:</strong> ${product.Fecha_de_Compra}</p>
+        <p><strong>Fecha de Compra:</strong> ${new Date(
+          product.Fecha_de_Compra
+        ).toLocaleDateString()}</p>
         <p><strong>Cantidad:</strong> ${product.Cantidad}</p>
-        <p><strong>NIT Empresa Suministradora:</strong> ${product.Fk_NIT_Empresa_Suministradora}</p>
-      </div>
+        </div>
     `;
 
       // Actualizar el contenido del modal con los detalles del producto
@@ -122,9 +122,7 @@ export function postProductHandler() {
 
         document.getElementById("inventario-form").reset();
 
-        refreshWindow()
-
-    
+        refreshWindow();
       } catch (error) {
         console.error("Error al añadir el producto:", error);
         // Aquí puedes manejar el error, como mostrar un mensaje de error al usuario
@@ -132,13 +130,11 @@ export function postProductHandler() {
     });
 }
 
-
-
 export async function updateProductHandler() {
   document.addEventListener("click", async (event) => {
     if (event.target.classList.contains("btn_edit")) {
       const productId = event.target.dataset.productId;
-      
+
       try {
         // Obtener el producto por su ID
         const product = await getProductById(productId);
@@ -219,6 +215,7 @@ export async function updateProductHandler() {
         if (updatedProductRes) {
           appendAlert("Producto actualizado exitosamente", "primary");
         }
+        refreshWindow();
       } catch (error) {
         console.error("Error al actualizar el producto:", error);
         // Manejar el error, por ejemplo, mostrando un mensaje al usuario
@@ -297,25 +294,21 @@ export function postVisitaHandler() {
     });
 }
 
-
-
 // manejador mostrar descripción visitas
 
 // manejador buscar visita por id
 
 // ---------------- handler login -----------------
 export async function loginHandler() {
-  document.addEventListener('DOMContentLoaded', () => {
-    const btnLogin = document.getElementById('btnLogin');
-    btnLogin.addEventListener('click', async () => {
-      const usuario = document.getElementById('usuario').value;
-      const contrasena = document.getElementById('contrasena').value;
-      
-      try {
-        const loginReq = await getLogin(usuario, contrasena);
-      } catch (error) {
-        console.error('Error al manejar el login:', error);
-      }
-    });
+  const btnLogin = document.getElementById("btnLogin");
+  btnLogin.addEventListener("click", async () => {
+    const usuario = document.getElementById("usuario").value;
+    const contrasena = document.getElementById("contrasena").value;
+
+    try {
+      const loginReq = await getLogin(usuario, contrasena);
+    } catch (error) {
+      console.error("Error al manejar el login:", error);
+    }
   });
 }

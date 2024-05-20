@@ -17,7 +17,7 @@ import {
 // función para refrescar el contenido dinamico de inventario
 
 
-export function refreshWindow(delay = 3000) {
+export function refreshWindow(delay = 2000) {
   setTimeout(() => {
     location.reload();
   }, delay);
@@ -307,7 +307,7 @@ export function postVisitaHandler() {
 
 // ---------------- handler login -----------------
 export async function loginHandler() {
-  document.addEventListener('DOMContentLoaded', () => {
+  
     const btnLogin = document.getElementById('btnLogin');
     btnLogin.addEventListener('click', async () => {
       const usuario = document.getElementById('usuario').value;
@@ -319,5 +319,4 @@ export async function loginHandler() {
         console.error('Error al manejar el login:', error);
       }
     });
-  });
 }

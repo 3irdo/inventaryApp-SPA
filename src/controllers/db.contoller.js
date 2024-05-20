@@ -135,9 +135,6 @@ export async function addVisita(visitaData) {
   }
 }
 
-
-
-
 export async function getVisitas() {
   try {
     const response = await fetch("http://localhost:3000/Visita_Tecnica");
@@ -225,6 +222,19 @@ export async function getEmpresas() {
   }
 }
 
+export async function getEmpresaById(empresaId) {
+  try {
+    const response = await fetch(
+      `http://localhost:3000/Empresa_Suministradora/${empresaId}`
+    );
+    const empresa = await response.json();
+    return empresa[0];
+  } catch (error) {
+    console.error(`Error al obtener la empresa con ID ${empresaId}:`, error);
+    throw error;
+  }
+}
+
 // ----------------------------Clientes ----------------------
 export async function getClientes() {
   try {
@@ -242,33 +252,92 @@ export async function getUsuarioTecnico() {
   try {
     const response = await fetch("http://localhost:3000/Usuario_Tecnico");
     const usuario_data = await response.json();
-    console.log(usuario_data)
+    console.log(usuario_data);
     return usuario_data;
-    
   } catch (error) {
     console.error("Error al obtener los datos de los usuarios", error);
     throw error;
   }
 }
 
-export async function addUsuarioTecnico(userData){
+export async function getUsuarioTecnicoById(userId) {
   try {
-      const response = await fetch("http://localhost:3000/Usuario_Tecnico",{
-          method: "POST",
-          headers: {
-              "Content-Type": "application/json",
-          },
-          body: JSON.stringify(userData)
-      });
-
-      const newUser = await response.json()
-      console.log(newUser)
-      return newUser
-
+    const response = await fetch(
+      `http://localhost:3000/Usuario_Tecnico/${userId}`
+    );
+    const user = await response.json();
+    return user;
   } catch (error) {
-      console.error("Error al agregar el nuevo usuario:", error);
-      throw error;
+    console.error(`Error al obtener el usuario con ID ${userId}:`, error);
+    throw error;
+  }
+}
+
+export async function addUsuarioTecnico(userData) {
+  try {
+    const response = await fetch("http://localhost:3000/Usuario_Tecnico", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    });
+    console.log(userData);
+
+    return response;
+  } catch (error) {
+    console.error("Error al agregar el nuevo usuario:", error);
+    throw error;
+  }
+}
+
+export async function deleteUsuarioTecnico(userId) {
+  try {
+    const response = await fetch(
+      `http://localhost:3000/Usuario_Tecnico/${userId}`,
+      {
+        method: "DELETE",
+      }
+    );
+
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(
+        `Error al eliminar usuario técnico con ID ${userId}: ${errorMessage}`
+      );
     }
+
+    return response.json();
+  } catch (error) {
+    console.error(
+      `Error al eliminar la visita técnica con ID ${userId}:`,
+      error
+    );
+    throw error;
+  }
+}
+
+export async function updateUsuarioTecnico(userId, updatedData) {
+  try {
+    const response = await fetch(
+      `http://localhost:3000/Usuario_Tecnico/${userId}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedData),
+      }
+    );
+    const updatedUsuario = await response.json();
+    return updatedUsuario;
+  } catch (error) {
+    console.error(
+      `Error al actualizar la visita técnica con ID ${userId}:`,
+      error
+    );
+    throw error;
+  }
 }
 
 export async function closeConnections() {

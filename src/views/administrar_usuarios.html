@@ -5,7 +5,7 @@
 
     <!-- Barra de búsqueda -->
     <div class="col-4 h-75 align-middle d-flex">
-        <input id="usuarioSearchInput" class="form-control mr-sm-2" type="search" placeholder="Buscar usuario"
+        <input id="usuarioSearchInput" required class="form-control mr-sm-2" type="search" placeholder="Buscar usuario"
             aria-label="Buscar usuario" />
         <button id="usuario_btn-search" class="btn btn-outline-dark my-2 my-sm-0" type="button">
             Buscar
@@ -36,6 +36,10 @@
                         <input type="text" class="form-control" id="nombre_usuario" />
                     </div>
                     <div class="mb-3">
+                        <label for="apellido_usuario" class="col-form-label">Apellido:</label>
+                        <input type="text" class="form-control" id="apellido_usuario" />
+                    </div>
+                    <div class="mb-3">
                         <label for="cc_usuario" class="col-form-label">CC:</label>
                         <input type="text" class="form-control" id="cc_usuario" />
                     </div>
@@ -44,10 +48,10 @@
                         <input type="email" class="form-control" id="email_usuario" />
                     </div>
                     <div class="mb-3">
-                        <label for="rol_usuario" class="col-form-label">Rol:</label>
-                        <input type="text" class="form-control" id="rol_usuario" />
+                        <label for="Telefono_Usuario" class="col-form-label">Contacto:</label>
+                        <input type="text" class="form-control" id="Telefono_Usuario" />
                     </div>
-                    
+
                     <button type="submit" id="agregar-usuario" class="btn btn-primary">Enviar</button>
                 </form>
             </div>

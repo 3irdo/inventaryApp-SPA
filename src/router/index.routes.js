@@ -4,14 +4,16 @@ import {
   Login,
   printVisitas,
   printDataInventario,
+  Index,
 } from "../controllers/index.controller";
 import {
   SearchProductId,
   loginHandler,
   postProductHandler,
+  refreshWindow,
   updateProductHandler,
 } from "../handler/inventario.events.handler";
-import { postUsuarioTecnico, printUsuarios } from "../handler/usuarios.handler";
+import { postUsuarioTecnico, printUsuarios, searchUsuarioTecnicoById } from "../handler/usuarios.handler";
 
 import {
   SearchVisitaId,
@@ -24,8 +26,11 @@ function router(route) {
   root.innerHTML = "";
 
   if (window.location.hash === "") {
+    root.appendChild(Index());
+  }
+  if (window.location.hash === "#/login") {
     root.appendChild(Login());
-    loginHandler(); // Invocar el handler después de añadir el Login al DOM
+    loginHandler();
   } else {
     root.appendChild(Home());
 
@@ -41,7 +46,7 @@ function router(route) {
         postVisitaTecnicaHandler(), updateVisitaTecnica(), SearchVisitaId();
         break;
       case "#/admUsuarios":
-        printUsuarios(), postUsuarioTecnico()
+        printUsuarios(), postUsuarioTecnico(), searchUsuarioTecnicoById();
         break;
       default:
         console.log("404");
