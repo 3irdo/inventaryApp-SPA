@@ -1,0 +1,143 @@
+<!-- Administración de Empresas -->
+
+<div class="d-flex align-items-center gap-2">
+    <h2 class="ps-2 flex-fill">Administrar Proveedores</h2>
+
+    <!-- Barra de búsqueda -->
+    <div class="col-4 h-75 align-middle d-flex">
+        <input id="empresaSearchInput" required class="form-control mr-sm-2" type="search" placeholder="Buscar empresa por NIT"
+            aria-label="Buscar empresa" />
+        <button id="empresa_btn-search" class="btn btn-outline-dark my-2 my-sm-0" type="button">
+            Buscar
+        </button>
+    </div>
+
+    <!-- Botón para añadir una nueva empresa -->
+    <button type="button" class="btn btn-info h-75" data-bs-toggle="modal" data-bs-target="#newEmpresaModal"
+        data-bs-whatever="@getbootstrap">
+        Añadir Empresa
+    </button>
+</div>
+
+<!-- Modal para añadir una nueva empresa -->
+<div class="modal fade" id="newEmpresaModal" tabindex="-1" aria-labelledby="newEmpresaModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="newEmpresaModalLabel">
+                    Nueva Empresa
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="empresa-form">
+                    <div class="mb-3">
+                        <label for="nombre_empresa" class="col-form-label">Nombre:</label>
+                        <input type="text" class="form-control" id="nombre_empresa" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="direccion_empresa" class="col-form-label">Dirección:</label>
+                        <input type="text" class="form-control" id="direccion_empresa" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="telefono_empresa" class="col-form-label">Teléfono:</label>
+                        <input type="text" class="form-control" id="telefono_empresa" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="email_empresa" class="col-form-label">Email:</label>
+                        <input type="email" class="form-control" id="email_empresa" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="nit_empresa" class="col-form-label">NIT:</label>
+                        <input type="text" class="form-control" id="nit_empresa" />
+                    </div>
+
+                    <button type="submit" id="agregar-empresa" class="btn btn-primary">Enviar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para editar empresa -->
+<div class="modal fade" id="editEmpresaModal" tabindex="-1" aria-labelledby="editEmpresaModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="editEmpresaModalLabel">Editar Empresa</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="edit-empresa-form">
+                    <div class="mb-3">
+                        <label for="edit_nombre_empresa" class="col-form-label">Nombre:</label>
+                        <input type="text" class="form-control" id="edit_nombre_empresa" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_direccion_empresa" class="col-form-label">Dirección:</label>
+                        <input type="text" class="form-control" id="edit_direccion_empresa" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_telefono_empresa" class="col-form-label">Teléfono:</label>
+                        <input type="text" class="form-control" id="edit_telefono_empresa" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_email_empresa" class="col-form-label">Email:</label>
+                        <input type="email" class="form-control" id="edit_email_empresa" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_nit_empresa" class="col-form-label">NIT:</label>
+                        <input type="text" class="form-control" id="edit_nit_empresa" />
+                    </div>
+                    <button type="submit" id="update-empresa" class="btn btn-primary">Actualizar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal mostrar detalles de la empresa por ID -->
+<div class="modal fade" id="empresaDetailsModal" tabindex="-1" aria-labelledby="empresaDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="empresaDetailsModalLabel">Detalles de la Empresa</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="empresa-details-content">
+                <!-- Aquí se mostrarán los detalles de la empresa -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="recent-empresas-tab" data-bs-toggle="tab" data-bs-target="#recent-empresas"
+            type="button" role="tab" aria-controls="recent-empresas" aria-selected="true">
+            Empresas Recientes
+        </button>
+    </li>
+</ul>
+
+<!-- Tab panels -->
+<div class="tab-content">
+    <div class="tab-pane active" id="recent-empresas" role="tabpanel" aria-labelledby="recent-empresas-tab">
+
+        <table class="table table-striped table-sm text-center">
+            <thead>
+                <tr class="text-center">
+                    <th scope="col">NIT Empresa</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Dirección</th>
+                    <th scope="col">Teléfono</th>
+                    <th>Modificar - Eliminar</th>
+                    </tr>
+            </thead>
+            <tbody id="tablaBody_E">
+
+            </tbody>
+        </table>
+    </div>
+</div>

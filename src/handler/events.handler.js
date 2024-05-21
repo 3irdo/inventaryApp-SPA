@@ -1,13 +1,10 @@
 import * as bootstrap from "bootstrap";
 import {
-  getEmpresas,
   getProductById,
-  getProducts,
   addProduct,
   updateProduct,
   addVisita,
-  getVisitaById,
-  getLogin,
+    getLogin,
   } from "../controllers/db.contoller";
 import {
   printDataInventario,
@@ -125,7 +122,7 @@ export function postProductHandler() {
 
         document.getElementById("inventario-form").reset();
 
-        // refreshWindow()
+        refreshWindow()
 
         // Aquí puedes hacer algo con el nuevo producto, como mostrar un mensaje de éxito o actualizar la lista de productos en la interfaz de usuario
       } catch (error) {

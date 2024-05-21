@@ -24,7 +24,7 @@ export async function getLogin(usuario, contrasena) {
       window.location.href = "#/inventario"; // Redireccionar al inventario si el login es exitoso
     } else {
       console.error("Error al iniciar sesión:", response.statusText);
-      alert("Error al iniciar sesión, comprueba las credenciales")
+      alert("Error al iniciar sesión, comprueba las credenciales");
     }
   } catch (error) {
     console.error("Error en la solicitud de login:", error);
@@ -237,6 +237,32 @@ export async function getEmpresaById(empresaId) {
   }
 }
 
+export async function deleteEmpresaById(empresaId) {
+  try {
+    const response = await fetch(
+      `http://localhost:3000/Empresa_Suministradora/${empresaId}`,
+      {
+        method: "DELETE",
+      }
+    );
+
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(
+        `Error al eliminar la empresa suministradora ${empresaId}: ${errorMessage}`
+      );
+    }
+    return response.json();
+  } catch (error) {
+    console.error(
+      `
+    error al eliminar la empresa con Nit ${empresaId}`,
+      error
+    );
+    throw error;
+  }
+}
+
 // ----------------------------Clientes ----------------------
 export async function getClientes() {
   try {
@@ -263,7 +289,9 @@ export async function getUsuarioTecnico() {
 
 export async function getUsuarioTecnicoById(userId) {
   try {
-    const response = await fetch(`http://localhost:3000/Usuario_Tecnico/${userId}`);
+    const response = await fetch(
+      `http://localhost:3000/Usuario_Tecnico/${userId}`
+    );
     if (!response.ok) {
       throw new Error(`Error: ${response.status} ${response.statusText}`);
     }

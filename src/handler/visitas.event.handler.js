@@ -4,12 +4,10 @@ import {
   getProducts,
   getUsuarioTecnico,
   getVisitaById,
-  getVisitas,
   updateVisita,
 } from "../controllers/db.contoller";
 import {
   createOption,
-  printVisitas,
   showAlert,
 } from "../controllers/index.controller";
 import { addVisitaTecnica } from "../controllers/visitas.controller";
@@ -44,7 +42,6 @@ export function postVisitaTecnicaHandler() {
 
         document.getElementById("visit-form").reset();
 
-        printVisitas();
         refreshWindow();
       } catch (error) {
         console.error("error al agregar la visita técnica", error);
@@ -164,7 +161,7 @@ export async function updateVisitaTecnica() {
           showAlert("Visita técnica editada", "success");
         }
 
-        printVisitas();
+        
         refreshWindow();
       } catch (error) {
         console.error("Error al actualizar la visita técnica:", error);

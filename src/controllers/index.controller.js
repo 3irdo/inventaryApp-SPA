@@ -3,6 +3,7 @@ import loginView from "../views/login.html";
 import homeView from "../views/home.html";
 import inventoryView from "../views/inventory.html";
 import hVisitasView from "../views/historial_visitas.html";
+import empresasView from '../views/empresasView.html'
 import {
   getProducts,
   getEmpresas,
@@ -104,7 +105,6 @@ export async function printDataInventario() {
               appendAlert("Producto eliminado exitosamente", "danger");
             }
 
-            printDataInventario();
             refreshWindow();
           } catch (error) {
             console.error("Error al eliminar el producto:", error);

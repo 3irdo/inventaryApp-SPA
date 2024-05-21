@@ -6,14 +6,21 @@ import {
   printDataInventario,
   Index,
 } from "../controllers/index.controller";
+
+import {printEmpresas, searchEmpresaById} from '../handler/empresas.event.handler'
+
 import {
   SearchProductId,
   loginHandler,
   postProductHandler,
-  refreshWindow,
   updateProductHandler,
 } from "../handler/inventario.events.handler";
-import { postUsuarioTecnico, printUsuarios, searchUsuarioTecnicoById, updateTecnico } from "../handler/usuarios.handler";
+import {
+  postUsuarioTecnico,
+  printUsuarios,
+  searchUsuarioTecnicoById,
+  updateTecnico,
+} from "../handler/usuarios.handler";
 
 import {
   SearchVisitaId,
@@ -46,8 +53,16 @@ function router(route) {
         postVisitaTecnicaHandler(), updateVisitaTecnica(), SearchVisitaId();
         break;
       case "#/admUsuarios":
-        printUsuarios(), postUsuarioTecnico(), searchUsuarioTecnicoById(), updateTecnico();
+        printUsuarios(),
+          postUsuarioTecnico(),
+          searchUsuarioTecnicoById(),
+          updateTecnico();
         break;
+
+      case "#/empresas":
+      printEmpresas(), searchEmpresaById()
+        break;
+
       default:
         console.log("404");
     }

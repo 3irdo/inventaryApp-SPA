@@ -1,15 +1,11 @@
 import * as bootstrap from "bootstrap";
 import {
-  getEmpresas,
   getProductById,
-  getProducts,
   addProduct,
   updateProduct,
   addVisita,
-  getVisitaById,
   getLogin,
-  getEmpresaById,
-} from "../controllers/db.contoller";
+  } from "../controllers/db.contoller";
 
 // función para refrescar el contenido dinamico de inventario
 
