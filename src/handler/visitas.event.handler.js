@@ -184,7 +184,6 @@ export function SearchVisitaId() {
         getVisitaById(visitaId),
         getClientes(),
         getProducts(),
-        getUsuarioTecnico(),
       ]);
 
       const visitaDetailsHTML = `
@@ -200,18 +199,18 @@ export function SearchVisitaId() {
        </div>
     `;
 
-//  no boorar
+      //  no boorar
 
-    // <p><strong>CC Técnico:</strong> ${tecnico.Nombre_Usuario} ${
-    //   tecnico.Pk_CC_Usuario
-    // }</p>
-    //   <p><strong>Producto:</strong>${product.Nombre_Producto} ${
-    //   product.Fk_Id_Producto
-    // }</p>
-    //   <p><strong>Cuenta cliente:</strong> ${
-    //     cliente.Fk_Numero_Cuenta_Cliente
-    //   }</p>
-    //   </div>
+      // <p><strong>CC Técnico:</strong> ${tecnico.Nombre_Usuario} ${
+      //   tecnico.Pk_CC_Usuario
+      // }</p>
+      //   <p><strong>Producto:</strong>${product.Nombre_Producto} ${
+      //   product.Fk_Id_Producto
+      // }</p>
+      //   <p><strong>Cuenta cliente:</strong> ${
+      //     cliente.Fk_Numero_Cuenta_Cliente
+      //   }</p>
+      //   </div>
 
       // Actualizar el contenido del modal con los detalles del producto
       const visitaDetailsContainer = document.getElementById(

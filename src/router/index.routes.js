@@ -13,7 +13,7 @@ import {
   refreshWindow,
   updateProductHandler,
 } from "../handler/inventario.events.handler";
-import { postUsuarioTecnico, printUsuarios, searchUsuarioTecnicoById } from "../handler/usuarios.handler";
+import { postUsuarioTecnico, printUsuarios, searchUsuarioTecnicoById, updateTecnico } from "../handler/usuarios.handler";
 
 import {
   SearchVisitaId,
@@ -46,7 +46,7 @@ function router(route) {
         postVisitaTecnicaHandler(), updateVisitaTecnica(), SearchVisitaId();
         break;
       case "#/admUsuarios":
-        printUsuarios(), postUsuarioTecnico(), searchUsuarioTecnicoById();
+        printUsuarios(), postUsuarioTecnico(), searchUsuarioTecnicoById(), updateTecnico();
         break;
       default:
         console.log("404");

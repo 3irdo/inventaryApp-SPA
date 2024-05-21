@@ -1,3 +1,5 @@
+import { showAlert } from "./index.controller";
+
 // --------------------------auth ------------
 export async function getLogin(usuario, contrasena) {
   try {
@@ -22,7 +24,7 @@ export async function getLogin(usuario, contrasena) {
       window.location.href = "#/inventario"; // Redireccionar al inventario si el login es exitoso
     } else {
       console.error("Error al iniciar sesión:", response.statusText);
-      // Aquí puedes mostrar un mensaje de error al usuario
+      alert("Error al iniciar sesión, comprueba las credenciales")
     }
   } catch (error) {
     console.error("Error en la solicitud de login:", error);
@@ -252,7 +254,6 @@ export async function getUsuarioTecnico() {
   try {
     const response = await fetch("http://localhost:3000/Usuario_Tecnico");
     const usuario_data = await response.json();
-    console.log(usuario_data);
     return usuario_data;
   } catch (error) {
     console.error("Error al obtener los datos de los usuarios", error);
@@ -262,9 +263,10 @@ export async function getUsuarioTecnico() {
 
 export async function getUsuarioTecnicoById(userId) {
   try {
-    const response = await fetch(
-      `http://localhost:3000/Usuario_Tecnico/${userId}`
-    );
+    const response = await fetch(`http://localhost:3000/Usuario_Tecnico/${userId}`);
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status} ${response.statusText}`);
+    }
     const user = await response.json();
     return user;
   } catch (error) {

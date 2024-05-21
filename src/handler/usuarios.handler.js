@@ -5,6 +5,7 @@ import {
   deleteUsuarioTecnico,
   getUsuarioTecnico,
   getUsuarioTecnicoById,
+  updateUsuarioTecnico,
 } from "../controllers/db.contoller";
 import { showAlert } from "../controllers/index.controller";
 import usersView from "../views/administrar_usuarios.html";
@@ -31,9 +32,11 @@ export async function printUsuarios() {
         <td>
           <button type="button" class="btn_edit_user rounded btn btn-primary" data-tecnico-id="${tecnico.Pk_CC_Usuario}"><span></span></button>
           <button type="button" class="btn_delete rounded btn btn-danger" data-tecnico-id="${tecnico.Pk_CC_Usuario}"><span></span></button>
-          <button type="button" class="btn_credencial rounded btn btn-info" data-tecnico-id="${tecnico.Pk_CC_Usuario}"><span></span>registrar</button>
+         
         </td>
       `;
+
+      // <button type="button" class="btn_credencial rounded btn btn-info" data-tecnico-id="${tecnico.Pk_CC_Usuario}"><span></span>registrar</button>
       tablaBody.appendChild(fila);
 
       fila.querySelector(".btn_delete").addEventListener("click", async (e) => {
@@ -101,13 +104,69 @@ export function postUsuarioTecnico() {
     });
 }
 
-export async function updateUsuarioTecnico() {
+export async function updateTecnico() {
+  let userId;
   document.addEventListener("click", async (e) => {
     if (e.target.classList.contains("btn_edit_user")) {
       userId = e.target.dataset.tecnicoId;
       try {
-        const user = await getUsuarioTecnico();
-      } catch (error) {}
+        const user = await getUsuarioTecnicoById(userId);
+        const editForm = document.getElementById("edit-user-form");
+
+        editForm.dataset.userData = userId;
+
+        function populateEditForm(user) {
+          document.getElementById("edit_nombre_usuario").value =
+            user.Nombre_Usuario;
+          document.getElementById("edit_apellido_usuario").value =
+            user.Apellido_Usuario;
+          document.getElementById("edit_cc_usuario").value = user.Pk_CC_Usuario;
+          document.getElementById("edit_email_usuario").value =
+            user.Correo_Usuario;
+          document.getElementById("edit_contacto_usuario").value =
+            user.Telefono_Usuario;
+        }
+
+        populateEditForm(user);
+
+        const editUserModal = new bootstrap.Modal(
+          document.getElementById("editUserModal")
+        );
+        editUserModal.show();
+
+        editForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const updatedData = {
+            Nombre_Usuario: document.getElementById("edit_nombre_usuario")
+              .value,
+            Apellido_Usuario: document.getElementById("edit_apellido_usuario")
+              .value,
+            Pk_CC_Usuario: document.getElementById("edit_cc_usuario").value,
+            Correo_Usuario: document.getElementById("edit_email_usuario").value,
+            Telefono_Usuario: document.getElementById("edit_contacto_usuario")
+              .value,
+          };
+
+          try {
+            const updatedUserRes = await updateUsuarioTecnico(userId, updatedData);
+
+            if (updatedUserRes) {
+              const editModal = bootstrap.Modal.getInstance(
+                document.getElementById("editUserModal")
+              );
+              editModal.hide();
+
+              showAlert("Usuario Técnico actualizado correctamente", "success");
+              refreshWindow();
+            }
+          } catch (error) {
+            console.error("Error al actualizar el usuario técnico:", error);
+          }
+        });
+      } catch (error) {
+        console.error("Error al obtener el usuario técnico:", error);
+      }
     }
   });
 }
@@ -116,11 +175,9 @@ export function searchUsuarioTecnicoById() {
   const btnSearch = document.getElementById("usuario_btn-search");
   const userSearch = btnSearch.addEventListener("click", async () => {
     const userId = document.getElementById("usuarioSearchInput").value;
-    
+
     try {
       const user = await getUsuarioTecnicoById(userId);
-
-       console.log(user)
 
       const usuarioDetails = `
     <div>

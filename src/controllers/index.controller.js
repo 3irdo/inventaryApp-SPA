@@ -150,6 +150,7 @@ export async function printVisitas() {
     const tablaBody_V = document.getElementById("tablaBody_V");
 
     hVisitas_data.forEach((visita) => {
+
       const fila = document.createElement("tr");
       fila.innerHTML = `
       <td>${visita.Pk_Id_Visita_Tecnica}</td>
@@ -240,7 +241,7 @@ export async function printVisitas() {
       clienteProducto_select.appendChild(
         createOption(
           product.Pk_Id_Producto,
-          `${product.Nombre_Producto} ID: ${product.Referencia}`
+          `${product.Nombre_Producto} Referencia: ${product.Referencia}`
         )
       );
     });
